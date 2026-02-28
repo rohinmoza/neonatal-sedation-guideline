@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neonatal Sedation Guideline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #6629b7;
+    --primary-light: #8347d1;
+    --primary-dark: #4e1f8e;
+    --primary-bg: #f3eefa;
+    --primary-bg-deep: #e8dcf5;
+    --accent: #ED2939;
+    --accent-light: #ff4d5c;
+    --accent-bg: #fef0f1;
+    --neutral-dark: #2C2C2C;
+    --neutral-mid: #5a5a5a;
+    --neutral-light: #E5E5E5;
+    --neutral-bg: #f8f8f8;
+    --white: #ffffff;
+    --success: #1a8a5c;
+    --success-bg: #eef8f3;
+    --warning: #c67a0e;
+    --warning-bg: #fef7ec;
+    --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.04);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--neutral-dark);
+    background: var(--neutral-bg);
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--neutral-light);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.95);
+  }
+
+  .header-top {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 28px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .header-version {
+    font-size: 12px;
+    color: var(--neutral-mid);
+    font-weight: 400;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    padding: 52px 28px 42px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(0,0,0,0.12) 0%, transparent 50%);
+  }
+
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    position: relative;
+    margin-bottom: 8px;
+  }
+
+  .hero .subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.88;
+    position: relative;
+  }
+
+  /* ── PRIMARY TABS (Pre / Post) ── */
+  .pathway-tabs {
+    display: flex;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+    gap: 0;
+    background: var(--white);
+  }
+
+  .pathway-tab {
+    flex: 1;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: var(--neutral-mid);
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    font-family: var(--font-body);
+    letter-spacing: 0.01em;
+  }
+
+  .pathway-tab:hover { color: var(--primary); background: var(--primary-bg); }
+  .pathway-tab.active { color: var(--primary); border-bottom-color: var(--primary); background: var(--primary-bg); }
+
+  /* ── CONTENT ── */
+  .content-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px 60px;
+  }
+
+  .pathway-panel { display: none; }
+  .pathway-panel.active { display: block; }
+
+  /* ── SECTION TABS ── */
+  .section-tabs {
+    display: flex;
+    gap: 2px;
+    margin: 24px 0 0;
+    background: var(--neutral-light);
+    border-radius: var(--radius-md);
+    padding: 3px;
+    overflow-x: auto;
+  }
+
+  .section-tab {
+    flex: 1;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: var(--neutral-mid);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    font-family: var(--font-body);
+    white-space: nowrap;
+  }
+
+  .section-tab:hover { color: var(--neutral-dark); background: rgba(255,255,255,0.6); }
+  .section-tab.active { color: var(--primary); background: var(--white); box-shadow: var(--shadow-sm); font-weight: 600; }
+
+  .section-panel { display: none; padding-top: 24px; }
+  .section-panel.active { display: block; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0,0,0,0.04);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .card-header {
+    padding: 18px 24px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary);
+    border-bottom: 1px solid var(--neutral-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card-header .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .badge-rn { background: var(--success-bg); color: var(--success); }
+  .badge-md { background: var(--warning-bg); color: var(--warning); }
+  .badge-rescue { background: var(--accent-bg); color: var(--accent); }
+
+  .card-body { padding: 20px 24px; }
+
+  /* ── SCOPE BOXES ── */
+  .scope-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 640px) { .scope-grid { grid-template-columns: 1fr; } }
+
+  .scope-box {
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid;
+  }
+
+  .scope-box.include {
+    background: var(--primary-bg);
+    border-color: rgba(102,41,183,0.15);
+  }
+
+  .scope-box.exclude {
+    background: var(--accent-bg);
+    border-color: rgba(237,41,57,0.12);
+  }
+
+  .scope-box h3 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+
+  .scope-box.include h3 { color: var(--primary); }
+  .scope-box.exclude h3 { color: var(--accent); }
+
+  .scope-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .scope-box li {
+    padding: 5px 0;
+    font-size: 14px;
+    color: var(--neutral-dark);
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .scope-box.include li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .scope-box.exclude li::before {
+    content: '✕';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  /* ── MEDICATION TABLE ── */
+  .med-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+  }
+
+  .med-table thead th {
+    background: var(--primary);
+    color: var(--white);
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: left;
+  }
+
+  .med-table thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+  .med-table thead th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
+
+  .med-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--neutral-light);
+    vertical-align: top;
+  }
+
+  .med-table tr:last-child td { border-bottom: none; }
+
+  .med-table tbody tr:hover { background: var(--primary-bg); }
+
+  .med-table .med-name {
+    font-weight: 600;
+    color: var(--neutral-dark);
+  }
+
+  .med-table .dose {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--primary-dark);
+    font-weight: 500;
+  }
+
+  .med-table .note {
+    font-size: 12px;
+    color: var(--neutral-mid);
+    font-style: italic;
+  }
+
+  /* ── FLOW STEPS ── */
+  .flow {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .flow::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    border-radius: 2px;
+  }
+
+  .flow-step {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 16px 20px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--neutral-light);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .flow-step:hover { border-color: var(--primary-light); box-shadow: var(--shadow-sm); }
+
+  .flow-step::before {
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2.5px solid var(--primary);
+    background: var(--white);
+  }
+
+  .flow-step.escalation::before { border-color: var(--warning); background: var(--warning-bg); }
+  .flow-step.rescue::before { border-color: var(--accent); background: var(--accent-bg); }
+
+  .flow-step-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .flow-step-label.rn { color: var(--success); }
+  .flow-step-label.md { color: var(--warning); }
+  .flow-step-label.rescue-label { color: var(--accent); }
+
+  .flow-step h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--neutral-dark);
+    margin-bottom: 6px;
+  }
+
+  .flow-step p, .flow-step ul {
+    font-size: 14px;
+    color: var(--neutral-mid);
+    line-height: 1.65;
+  }
+
+  .flow-step ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .flow-step li {
+    padding: 3px 0 3px 16px;
+    position: relative;
+  }
+
+  .flow-step li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--primary-light);
+    font-weight: 600;
+  }
+
+  .flow-connector {
+    text-align: center;
+    padding: 4px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .flow-connector::before {
+    content: '▼';
+    display: block;
+    font-size: 10px;
+    margin-bottom: 2px;
+    color: var(--accent);
+  }
+
+  /* ── DOSE CHIP ── */
+  .dose-chip {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--primary-bg);
+    color: var(--primary-dark);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin: 1px 2px;
+  }
+
+  .dose-chip.alt {
+    background: var(--success-bg);
+    color: var(--success);
+  }
+
+  .dose-chip.warn {
+    background: var(--accent-bg);
+    color: var(--accent);
+  }
+
+  /* ── ASSESSMENT BOX ── */
+  .assess-box {
+    background: var(--primary-bg);
+    border: 1px solid rgba(102,41,183,0.12);
+    border-left: 4px solid var(--primary);
+    padding: 16px 20px;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin-bottom: 16px;
+  }
+
+  .assess-box h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .assess-box p {
+    font-size: 14px;
+    color: var(--neutral-dark);
+    line-height: 1.6;
+  }
+
+  .assess-box .tool-tag {
+    display: inline-block;
+    background: var(--white);
+    border: 1px solid var(--primary-light);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin: 2px 4px 2px 0;
+  }
+
+  /* ── TRIGGER BOX ── */
+  .trigger-box {
+    background: var(--warning-bg);
+    border: 1px solid rgba(198,122,14,0.15);
+    border-left: 4px solid var(--warning);
+    padding: 14px 20px;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--neutral-dark);
+  }
+
+  .trigger-box strong { color: var(--warning); }
+
+  /* ── ALERT BOX ── */
+  .alert-box {
+    background: var(--accent-bg);
+    border: 1px solid rgba(237,41,57,0.12);
+    border-left: 4px solid var(--accent);
+    padding: 14px 20px;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  .alert-box strong { color: var(--accent); }
+
+  /* ── NON-PHARM ── */
+  .non-pharm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .non-pharm-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--neutral-bg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--neutral-light);
+    font-size: 13px;
+    color: var(--neutral-dark);
+    line-height: 1.45;
+  }
+
+  .non-pharm-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    height: 1px;
+    background: var(--neutral-light);
+    margin: 28px 0;
+  }
+
+  /* ── BRIDGING CARD ── */
+  .bridge-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 640px) { .bridge-grid { grid-template-columns: 1fr; } }
+
+  .bridge-item {
+    padding: 16px 20px;
+    background: var(--neutral-bg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--neutral-light);
+  }
+
+  .bridge-item h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+
+  .bridge-item p {
+    font-size: 13px;
+    color: var(--neutral-dark);
+    line-height: 1.55;
+  }
+
+  /* ── TWO COL CHOICE ── */
+  .choice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 12px 0;
+  }
+
+  @media (max-width: 640px) { .choice-grid { grid-template-columns: 1fr; } }
+
+  .choice-option {
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--neutral-light);
+    text-align: center;
+  }
+
+  .choice-option.preferred { border-color: var(--primary); background: var(--primary-bg); }
+
+  .choice-option .choice-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .choice-option.preferred .choice-label { color: var(--primary); }
+  .choice-option:not(.preferred) .choice-label { color: var(--neutral-mid); }
+
+  .choice-option .choice-drug {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--neutral-dark);
+  }
+
+  .choice-option .choice-dose {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--primary-dark);
+    margin-top: 2px;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    text-align: center;
+    padding: 24px 28px;
+    font-size: 12px;
+    color: var(--neutral-mid);
+    border-top: 1px solid var(--neutral-light);
+    background: var(--white);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { padding: 36px 20px 30px; }
+    .hero h1 { font-size: 24px; }
+    .content-wrap { padding: 0 16px 40px; }
+    .card-body { padding: 16px 18px; }
+    .flow { padding-left: 28px; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card { animation: fadeInUp 0.35s ease both; }
+  .card:nth-child(2) { animation-delay: 0.06s; }
+  .card:nth-child(3) { animation-delay: 0.12s; }
+  .card:nth-child(4) { animation-delay: 0.18s; }
+
+  /* ── INLINE SPLIT ── */
+  .inline-split {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .inline-split > * { flex: 1; }
+
+  @media (max-width: 640px) { .inline-split { flex-direction: column; } }
+
+  /* ── RULE ITEM ── */
+  .rule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    font-size: 14px;
+    color: var(--neutral-dark);
+  }
+
+  .rule-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .rule-icon.trigger { background: var(--warning-bg); color: var(--warning); }
+  .rule-icon.stop { background: var(--accent-bg); color: var(--accent); }
+
+  /* ── NON-PHARM INLINE STRIP ── */
+  .nonpharm-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 18px;
+    background: var(--primary-bg);
+    border: 1.5px solid rgba(102,41,183,0.18);
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+  }
+
+  .nonpharm-strip-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+  }
+
+  .nonpharm-strip-items {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .nonpharm-chip {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--primary-dark);
+    background: var(--white);
+    border: 1px solid rgba(102,41,183,0.2);
+    padding: 5px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-top">
+    <span class="header-title">Heart Center Neonatal Sedation Guideline</span>
+    <span class="header-version">v1.0</span>
+  </div>
+  <nav class="pathway-tabs" id="pathwayTabs">
+    <button class="pathway-tab active" data-panel="pre">Pre-Surgery Pathway</button>
+    <button class="pathway-tab" data-panel="post">Post-Surgery Pathway</button>
+    <button class="pathway-tab" data-panel="bridge">IV → Enteral Bridge</button>
+    <button class="pathway-tab" data-panel="dosing">Dosing Reference</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Neonatal Sedation &amp; Analgesia</h1>
+  <p class="subtitle">Intubated Neonates &lt; 30 Days · Pre- &amp; Post-Cardiac Surgery</p>
+</section>
+
+<div class="content-wrap">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PRE-SURGERY PANEL                          -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="pathway-panel active" id="panel-pre">
+
+  <div class="section-tabs" id="preTabs">
+    <button class="section-tab active" data-section="pre-scope">Scope</button>
+    <button class="section-tab" data-section="pre-start">Starting Regimen</button>
+    <button class="section-tab" data-section="pre-esc">Escalation</button>
+  </div>
+
+  <!-- SCOPE -->
+  <div class="section-panel active" id="pre-scope">
+    <div class="scope-grid">
+      <div class="scope-box include">
+        <h3>Inclusion Criteria</h3>
+        <ul>
+          <li>Intubated neonates &lt; 30 days of age</li>
+          <li>Pre-cardiac surgery</li>
+        </ul>
+      </div>
+      <div class="scope-box exclude">
+        <h3>Exclusion Criteria</h3>
+        <ul>
+          <li>Continuous neuromuscular blockade (paralyzed)</li>
+          <li>ECMO</li>
+          <li>End of life care</li>
+          <li>Pre-existing tolerance requiring individualized plan</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="assess-box">
+      <h4>Assessment Tools</h4>
+      <p>
+        <span class="tool-tag">SBS</span> Sedation level &nbsp;·&nbsp;
+        <span class="tool-tag">rFLACC</span> Pain assessment
+      </p>
+      <p style="margin-top:8px;">
+        <strong>Scheduled:</strong> Every 4 hours &nbsp;|&nbsp;
+        <strong>Escalation reassessment:</strong> Every 30 minutes
+      </p>
+    </div>
+  </div>
+
+  <!-- STARTING REGIMEN -->
+  <div class="section-panel" id="pre-start">
+    <div class="nonpharm-strip">
+      <div class="nonpharm-strip-label">Non-Pharmacologic Measures</div>
+      <div class="nonpharm-strip-items">
+        <span class="nonpharm-chip">Cluster cares</span>
+        <span class="nonpharm-chip">Swaddling</span>
+        <span class="nonpharm-chip">Minimize noise/light</span>
+        <span class="nonpharm-chip">Topical anesthetics</span>
+        <span class="nonpharm-chip">Family contact</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">Starting Regimen — Pre-Surgery</div>
+      <div class="card-body">
+        <table class="med-table">
+          <thead>
+            <tr><th>Medication</th><th>Dose</th><th>Route / Frequency</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="med-name">Acetaminophen</td>
+              <td class="dose">10 mg/kg</td>
+              <td>IV Q4H PRN</td>
+            </tr>
+            <tr>
+              <td class="med-name">Dexmedetomidine</td>
+              <td class="dose">0.2 mcg/kg/hr</td>
+              <td>Continuous Infusion</td>
+            </tr>
+            <tr>
+              <td class="med-name">Morphine</td>
+              <td class="dose">0.025 mg/kg</td>
+              <td>Q3H +/- PRN</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="alert-box" style="margin-top:16px;">
+          <strong>⚑</strong> No ketamine or midazolam in the preoperative phase.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESCALATION -->
+  <div class="section-panel" id="pre-esc">
+    <div class="nonpharm-strip">
+      <div class="nonpharm-strip-label">Non-Pharmacologic Measures</div>
+      <div class="nonpharm-strip-items">
+        <span class="nonpharm-chip">Cluster cares</span>
+        <span class="nonpharm-chip">Swaddling</span>
+        <span class="nonpharm-chip">Minimize noise/light</span>
+        <span class="nonpharm-chip">Topical anesthetics</span>
+        <span class="nonpharm-chip">Family contact</span>
+      </div>
+    </div>
+    <div class="assess-box" style="margin-bottom:20px;">
+      <h4>Assessment</h4>
+      <p>Assess <span class="tool-tag">SBS</span> &amp; <span class="tool-tag">rFLACC</span> every 4 hours. If inadequate sedation or pain control, begin escalation below.</p>
+    </div>
+
+    <div class="flow">
+
+      <!-- Step 1 -->
+      <div class="flow-step">
+        <div class="flow-step-label rn">
+          <span class="badge badge-rn">RN Directed</span> Step 1
+        </div>
+        <h4>Bolus Morphine</h4>
+        <p>Administer a single dose of morphine <span class="dose-chip">0.025 mg/kg</span>.</p>
+        <p style="margin-top:6px;"><strong>Wait 30 min</strong> — observe for effectiveness of morphine.</p>
+      </div>
+
+      <div class="flow-connector">If still inadequate</div>
+
+      <!-- Step 2 -->
+      <div class="flow-step">
+        <div class="flow-step-label rn">
+          <span class="badge badge-rn">RN Directed</span> Step 2
+        </div>
+        <h4>Bolus Morphine + IV Tylenol</h4>
+        <p>Administer another morphine dose <span class="dose-chip">0.025 mg/kg</span> + <span class="dose-chip alt">IV Acetaminophen 10 mg/kg</span>.</p>
+        <p style="margin-top:6px;"><strong>Wait 30 min</strong> — observe for effectiveness of combined treatment.</p>
+      </div>
+
+      <div class="flow-connector">If still inadequate</div>
+
+      <!-- Step 3 -->
+      <div class="flow-step escalation">
+        <div class="flow-step-label md">
+          <span class="badge badge-md">Notify Provider</span> Step 3
+        </div>
+        <h4>Increase Dexmedetomidine</h4>
+        <p>Adjust the dexmedetomidine infusion rate up to <span class="dose-chip">0.5 mcg/kg/hr</span>.</p>
+        <p style="margin-top:6px;"><strong>Wait 30 min</strong> — observe for effectiveness of dexmedetomidine.</p>
+      </div>
+
+      <div class="flow-connector">If still inadequate</div>
+
+      <!-- Step 4 -->
+      <div class="flow-step escalation">
+        <div class="flow-step-label md">
+          <span class="badge badge-md">Provider</span> Step 4
+        </div>
+        <h4>Start Morphine Drip</h4>
+        <p>Initiate a continuous morphine infusion at <span class="dose-chip">0.02 mg/kg/hr</span>.</p>
+      </div>
+
+      <div class="flow-connector">If still inadequate</div>
+
+      <!-- Step 5 -->
+      <div class="flow-step escalation">
+        <div class="flow-step-label md">
+          <span class="badge badge-md">Provider</span> Step 5
+        </div>
+        <h4>Repeat Morphine Bolus up to 3 Times</h4>
+        <p>Administer additional morphine boluses <span class="dose-chip">0.025 mg/kg</span> if needed.</p>
+        <p style="margin-top:6px;"><strong>Reassess every 30 min</strong> — evaluate pain levels frequently between each bolus.</p>
+      </div>
+
+      <div class="flow-connector">If still inadequate</div>
+
+      <!-- Step 6 -->
+      <div class="flow-step escalation">
+        <div class="flow-step-label md">
+          <span class="badge badge-md">Provider</span> Step 6
+        </div>
+        <h4>Increase Morphine Drip</h4>
+        <p>Increase by <span class="dose-chip">+0.01 mg/kg/hr</span> increments.</p>
+      </div>
+
+    </div>
+
+    <div class="alert-box">
+      <strong>⚑</strong> No ketamine or midazolam in the preoperative phase.
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- POST-SURGERY PANEL                         -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="pathway-panel" id="panel-post">
+
+  <div class="section-tabs" id="postTabs">
+    <button class="section-tab active" data-section="post-scope">Scope</button>
+    <button class="section-tab" data-section="post-start">Starting Regimen</button>
+    <button class="section-tab" data-section="post-esc">Escalation</button>
+  </div>
+
+  <!-- SCOPE -->
+  <div class="section-panel active" id="post-scope">
+    <div class="scope-grid">
+      <div class="scope-box include">
+        <h3>Inclusion Criteria</h3>
+        <ul>
+          <li>Intubated neonates &lt; 30 days of age</li>
+          <li>Post-cardiac surgery</li>
+        </ul>
+      </div>
+      <div class="scope-box exclude">
+        <h3>Exclusion Criteria</h3>
+        <ul>
+          <li>Continuous neuromuscular blockade (paralyzed)</li>
+          <li>ECMO</li>
+          <li>End of life care</li>
+          <li>Pre-existing tolerance requiring individualized plan</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="assess-box">
+      <h4>Assessment Tools</h4>
+      <p>
+        <span class="tool-tag">SBS</span> Sedation level &nbsp;·&nbsp;
+        <span class="tool-tag">rFLACC</span> Pain assessment
+      </p>
+      <p style="margin-top:8px;">
+        <strong>Scheduled:</strong> Every 4 hours &nbsp;|&nbsp;
+        <strong>Escalation reassessment:</strong> Every 30 minutes
+      </p>
+    </div>
+  </div>
+
+  <!-- STARTING REGIMEN -->
+  <div class="section-panel" id="post-start">
+    <div class="nonpharm-strip">
+      <div class="nonpharm-strip-label">Non-Pharmacologic Measures</div>
+      <div class="nonpharm-strip-items">
+        <span class="nonpharm-chip">Cluster cares</span>
+        <span class="nonpharm-chip">Swaddling</span>
+        <span class="nonpharm-chip">Minimize noise/light</span>
+        <span class="nonpharm-chip">Topical anesthetics</span>
+        <span class="nonpharm-chip">Family contact</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">Starting Regimen — Post-Surgery</div>
+      <div class="card-body">
+
+        <table class="med-table">
+          <thead>
+            <tr><th>Medication</th><th>Dose</th><th>Route / Frequency</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="med-name">Acetaminophen</td>
+              <td class="dose">10 mg/kg</td>
+              <td>IV Q4H × 72 hours (scheduled)</td>
+            </tr>
+            <tr>
+              <td class="med-name">Dexmedetomidine</td>
+              <td class="dose">0.2 mcg/kg/hr</td>
+              <td>Continuous Infusion</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top:20px; margin-bottom:8px; font-size:13px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.04em;">
+          Choose ONE Primary Opioid
+        </div>
+
+        <div class="choice-grid">
+          <div class="choice-option preferred">
+            <div class="choice-label">First-Line</div>
+            <div class="choice-drug">Morphine</div>
+            <div class="choice-dose">0.02 mg/kg/hr</div>
+          </div>
+          <div class="choice-option">
+            <div class="choice-label">Alternative</div>
+            <div class="choice-drug">Fentanyl</div>
+            <div class="choice-dose">0.5 mcg/kg/hr</div>
+          </div>
+        </div>
+
+        <div class="trigger-box" style="margin-top:16px;">
+          <strong>⚑ Hydromorphone</strong> reserved for difficult sedation, opioid tachyphylaxis, ECMO, or renal insufficiency. Not part of standard pathway.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESCALATION -->
+  <div class="section-panel" id="post-esc">
+
+    <div class="nonpharm-strip">
+      <div class="nonpharm-strip-label">Non-Pharmacologic Measures</div>
+      <div class="nonpharm-strip-items">
+        <span class="nonpharm-chip">Cluster cares</span>
+        <span class="nonpharm-chip">Swaddling</span>
+        <span class="nonpharm-chip">Minimize noise/light</span>
+        <span class="nonpharm-chip">Topical anesthetics</span>
+        <span class="nonpharm-chip">Family contact</span>
+      </div>
+    </div>
+
+    <div class="assess-box" style="margin-bottom:20px;">
+      <h4>Assessment &amp; Escalation Triggers</h4>
+      <p>Assess <span class="tool-tag">SBS</span> &amp; <span class="tool-tag">rFLACC</span> every 4 hours. If SBS or pain score inadequate, begin escalation below.</p>
+      <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(102,41,183,0.12);">
+        <p style="margin:0;">
+          <span class="tool-tag" style="background:var(--warning-bg); border-color:var(--warning); color:var(--warning);">&gt; 3 PRNs in 6h</span> → increase drip &nbsp;&nbsp;
+          <span class="tool-tag" style="background:var(--warning-bg); border-color:var(--warning); color:var(--warning);">&gt; 6 PRNs in 12h</span> → further increase
+        </p>
+        <p style="margin-top:6px; font-size:12px; color:var(--neutral-mid);">Non-procedural PRNs only. Do <strong>not</strong> count procedural sedation doses.</p>
+      </div>
+    </div>
+
+    <div class="flow">
+
+      <!-- Step 1 -->
+      <div class="flow-step">
+        <div class="flow-step-label rn">
+          <span class="badge badge-rn">RN Directed</span> Step 1
+        </div>
+        <h4>Administer Matching Opioid Bolus up to 3× q30min</h4>
+        <p>Bolus dose <strong>equals the current hourly infusion rate</strong>. Reassess every <strong>30 min</strong> between doses, up to <strong>3 boluses</strong> total.</p>
+      </div>
+
+      <div class="flow-connector">Reassess patient — if still inadequate</div>
+
+      <!-- Step 2 -->
+      <div class="flow-step escalation">
+        <div class="flow-step-label md">
+          <span class="badge badge-md">Notify Provider</span> Step 2
+        </div>
+        <h4>Notify First-Line Provider</h4>
+        <p>Inform the first-line provider of inadequate pain management despite bolus dosing.</p>
+      </div>
+
+      <div class="flow-connector">Provider directs drip increase</div>
+
+      <!-- Step 3 -->
+      <div class="flow-step escalation">
+        <div class="flow-step-label md">
+          <span class="badge badge-md">Provider</span> Step 3
+        </div>
+        <h4>Increase Drip — First Escalation</h4>
+        <p>Increase drip incrementally based on assessment scores:</p>
+        <div class="choice-grid" style="margin-top:10px;">
+          <div class="choice-option preferred">
+            <div class="choice-label">If rFLACC inadequate</div>
+            <div class="choice-drug" style="font-size:13px;">Morphine <span class="dose-chip">+0.01 mg/kg/hr</span></div>
+            <div class="choice-drug" style="font-size:13px; margin-top:4px;">Fentanyl <span class="dose-chip">+0.5 mcg/kg/hr</span></div>
+          </div>
+          <div class="choice-option preferred">
+            <div class="choice-label">If SBS inadequate</div>
+            <div class="choice-drug" style="font-size:13px;">Dex <span class="dose-chip">+0.1 mcg/kg/hr</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-connector">Reassess patient — if still inadequate</div>
+
+      <!-- Step 4 -->
+      <div class="flow-step escalation">
+        <div class="flow-step-label md">
+          <span class="badge badge-md">Provider</span> Step 4
+        </div>
+        <h4>Increase Drip — Second Escalation</h4>
+        <p>Repeat the same incremental increase:</p>
+        <div class="choice-grid" style="margin-top:10px;">
+          <div class="choice-option preferred">
+            <div class="choice-label">If rFLACC inadequate</div>
+            <div class="choice-drug" style="font-size:13px;">Morphine <span class="dose-chip">+0.01 mg/kg/hr</span></div>
+            <div class="choice-drug" style="font-size:13px; margin-top:4px;">Fentanyl <span class="dose-chip">+0.5 mcg/kg/hr</span></div>
+          </div>
+          <div class="choice-option preferred">
+            <div class="choice-label">If SBS inadequate</div>
+            <div class="choice-drug" style="font-size:13px;">Dex <span class="dose-chip">+0.1 mcg/kg/hr</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-connector">Reassess patient — if still inadequate</div>
+
+      <!-- Step 5 -->
+      <div class="flow-step rescue">
+        <div class="flow-step-label rescue-label">
+          <span class="badge badge-md">Provider</span> Step 5
+        </div>
+        <h4>Midazolam (Versed)</h4>
+        <p>Intermittent: <span class="dose-chip warn">0.025 mg/kg Q4H PRN</span></p>
+      </div>
+
+      <div class="flow-connector">If still inadequate</div>
+
+      <!-- Step 6 -->
+      <div class="flow-step rescue">
+        <div class="flow-step-label rescue-label">
+          <span class="badge badge-md">Provider</span> Step 6
+        </div>
+        <h4>Ketamine</h4>
+        <ul>
+          <li>Intermittent: <span class="dose-chip warn">0.5 mg/kg Q4H PRN</span></li>
+          <li>Infusion: <span class="dose-chip warn">0.1 mg/kg/hr</span> start, titrate to max <span class="dose-chip warn">1 mg/kg/hr</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="card">
+      <div class="card-header">Opioid Rotation Guidelines</div>
+      <div class="card-body">
+        <div class="rule-item">
+          <div class="rule-icon trigger">!</div>
+          <div>Rotate opioids if inadequate SBS / rFLACC on <strong>max dose</strong> of current agent.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon stop">⚑</div>
+          <div>When rotating opioids, reduce calculated equianalgesic dose by <strong>25–50%</strong> for incomplete cross-tolerance.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- DOSING REFERENCE PANEL                     -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="pathway-panel" id="panel-dosing">
+  <div class="card">
+    <div class="card-header">Complete Dosing Guidelines</div>
+    <div class="card-body">
+      <table class="med-table">
+        <thead>
+          <tr><th>Medication</th><th>Titration Increment</th><th>Dosing Range</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="med-name">Morphine</td>
+            <td class="dose">0.01 mg/kg/hr</td>
+            <td class="dose">0.02–0.2 mg/kg/hr</td>
+          </tr>
+          <tr>
+            <td class="med-name">Fentanyl</td>
+            <td class="dose">0.5 mcg/kg/hr</td>
+            <td class="dose">0.5–2.5 mcg/kg/hr</td>
+          </tr>
+          <tr>
+            <td class="med-name">Hydromorphone</td>
+            <td class="dose">0.002–0.004 mg/kg/hr</td>
+            <td class="dose">0.005–0.04 mg/kg/hr</td>
+          </tr>
+          <tr>
+            <td class="med-name">Dexmedetomidine</td>
+            <td class="dose">0.1 mcg/kg/hr</td>
+            <td class="dose">0.1–1.4 mcg/kg/hr</td>
+          </tr>
+          <tr>
+            <td class="med-name">Midazolam</td>
+            <td class="dose">—</td>
+            <td class="dose">0.025 mg/kg Q4H PRN</td>
+          </tr>
+          <tr>
+            <td class="med-name">Ketamine</td>
+            <td class="dose">0.1–0.5 mg/kg/hr</td>
+            <td class="dose">0.1–1 mg/kg/hr</td>
+          </tr>
+          <tr>
+            <td class="med-name">Clonidine</td>
+            <td class="dose">—</td>
+            <td class="dose">0.5–2.5 mcg/kg Q6H</td>
+          </tr>
+          <tr>
+            <td class="med-name">Acetaminophen</td>
+            <td class="dose">n/a</td>
+            <td class="dose">10 mg/kg; Max 75 mg/kg/day or 4 g</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="trigger-box" style="margin-top:16px;">
+        <strong>⚑ Hydromorphone</strong> reserved for difficult sedation, opioid tachyphylaxis, ECMO, or renal insufficiency.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- IV → ENTERAL BRIDGE PANEL                  -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="pathway-panel" id="panel-bridge">
+  <div class="alert-box" style="margin-bottom:20px;">
+    <strong>IV → Enteral Bridging:</strong> Do not start enteral agent until first step of IV agent wean is anticipated within 12 hours of first enteral dose.
+  </div>
+
+  <!-- CLONIDINE -->
+  <div class="card">
+    <div class="card-header" style="color:var(--primary);">Dex → Clonidine</div>
+    <div class="card-body" style="font-size:14px; line-height:1.7;">
+      <p><strong>Start when:</strong> Dex exposure <span class="dose-chip">≥ 7 days</span> &nbsp;and&nbsp; Dex gtt <span class="dose-chip">&lt; 1 mcg/kg/hr</span></p>
+      <p style="margin-top:10px;"><strong>Wean target:</strong> Dex off within <strong>48–72 hours</strong> of starting clonidine.</p>
+      <p style="margin-top:10px;"><strong>If unlikely to wean in that window:</strong> Discontinue clonidine and continue dex gtt wean alone. Clonidine is not always necessary. Dex-only wean can also be completed on the floor.</p>
+      <div style="margin-top:14px; padding:12px 16px; background:var(--accent-bg); border-radius:var(--radius-sm); font-size:13.5px;">
+        <strong style="color:var(--accent);">Clonidine ≠ Dex.</strong> 8× lower α-2 selectivity. Increasing the dose will not replicate dex's sedation profile. Use within dosing range as a <em>weaning bridge only.</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTERAL OPIOID -->
+  <div class="card">
+    <div class="card-header" style="color:var(--primary);">Opioid → Morphine / Methadone</div>
+    <div class="card-body" style="font-size:14px; line-height:1.7;">
+      <p><strong>Start when:</strong> Opioid exposure <span class="dose-chip">≥ 5 days</span> &nbsp;and&nbsp; Morphine gtt <span class="dose-chip">&lt; 0.15 mg/kg/hr</span> &nbsp;<em>or</em>&nbsp; Fentanyl gtt <span class="dose-chip">&lt; 2 mcg/kg/hr</span></p>
+      <p style="margin-top:14px;"><strong>Agent selection:</strong></p>
+      <div class="choice-grid" style="margin-top:8px;">
+        <div class="choice-option preferred">
+          <div class="choice-label">Exposure &lt; 2 Weeks</div>
+          <div class="choice-drug">Morphine</div>
+        </div>
+        <div class="choice-option preferred">
+          <div class="choice-label">Exposure &gt; 2 Weeks</div>
+          <div class="choice-drug">Methadone</div>
+        </div>
+      </div>
+      <p style="margin-top:14px;"><strong>Wean target:</strong> IV opioid off within <strong>48–72 hours</strong> of starting enteral agent.</p>
+      <p style="margin-top:10px;"><strong>Conversion:</strong> Determine opioid equipotent conversion <strong>in discussion with Pharmacy</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  Heart Center Neonatal Sedation Guideline · v1.0 · Intubated Neonates &lt; 30 Days
+</footer>
+
+<script>
+// ── Tab Logic ──
+function initTabs(tabContainer, panelPrefix) {
+  const tabs = tabContainer.querySelectorAll('.pathway-tab, .section-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Deactivate siblings
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const target = tab.dataset.panel || tab.dataset.section;
+
+      if (tab.classList.contains('pathway-tab')) {
+        // Pathway-level tabs
+        document.querySelectorAll('.pathway-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('panel-' + target).classList.add('active');
+      } else {
+        // Section-level tabs
+        const parent = tab.closest('.pathway-panel');
+        parent.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(target).classList.add('active');
+      }
+    });
+  });
+}
+
+// Init pathway tabs
+initTabs(document.getElementById('pathwayTabs'));
+
+// Init all section tab groups
+document.querySelectorAll('.section-tabs').forEach(group => {
+  initTabs(group);
+});
+</script>
+</body>
+</html>
