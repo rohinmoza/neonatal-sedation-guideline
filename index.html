@@ -787,6 +787,7 @@
     <button class="section-tab active" data-section="pre-scope">Scope</button>
     <button class="section-tab" data-section="pre-start">Starting Regimen</button>
     <button class="section-tab" data-section="pre-esc">Escalation</button>
+    <button class="section-tab" data-section="pre-wean">Weaning</button>
   </div>
 
   <!-- SCOPE -->
@@ -881,8 +882,15 @@
       </div>
     </div>
     <div class="assess-box" style="margin-bottom:20px;">
-      <h4>Assessment</h4>
+      <h4>Assessment &amp; Escalation Triggers</h4>
       <p>Assess sedation and pain scores every 4 hours. If inadequate, begin escalation below.</p>
+      <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(102,41,183,0.12);">
+        <p style="margin:0;">
+          <span class="tool-tag" style="background:var(--warning-bg); border-color:var(--warning); color:var(--warning);">&gt; 3 PRNs in 6h</span> → increase drip &nbsp;&nbsp;
+          <span class="tool-tag" style="background:var(--warning-bg); border-color:var(--warning); color:var(--warning);">&gt; 6 PRNs in 12h</span> → further increase
+        </p>
+        <p style="margin-top:6px; font-size:12px; color:var(--neutral-mid);">Non-procedural PRNs only. Do <strong>not</strong> count procedural sedation doses.</p>
+      </div>
     </div>
 
     <div class="flow">
@@ -923,6 +931,8 @@
 
       <div class="flow-connector">If still inadequate</div>
 
+      <div class="flow-connector" style="background:var(--primary-bg); border:1px solid rgba(102,41,183,0.15); border-radius:var(--radius-sm); padding:8px 16px; font-weight:600; color:var(--primary);">Patient now on both continuous dex + continuous opioid from this step forward</div>
+
       <!-- Step 4 -->
       <div class="flow-step escalation">
         <div class="flow-step-label md">
@@ -962,7 +972,57 @@
     </div>
   </div>
 
+  <!-- WEANING -->
+  <div class="section-panel" id="pre-wean">
+
+    <div class="assess-box" style="margin-bottom:20px;">
+      <h4>When to Begin Weaning</h4>
+      <p>No non-procedural PRNs given in the prior <strong>12 hours</strong> with stable hemodynamics and adequate sedation/pain scores.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Wean Protocol</div>
+      <div class="card-body" style="font-size:14px; line-height:1.7;">
+        <p><strong>If on continuous dex only (no opioid drip):</strong> Wean dex first. Reduce by <span class="dose-chip">10%</span> of current rate. Monitor for unexplained hypertension or tachycardia.</p>
+        <p style="margin-top:10px;"><strong>If on both continuous opioid and dex:</strong> Reduce opioid by <span class="dose-chip">10%</span> of current rate. Monitor for withdrawal signs. Wean dex after opioid wean is underway.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">SBS × WAT-1 Decision Matrix</div>
+      <div class="card-body">
+        <table class="med-table" style="text-align:center;">
+          <thead>
+            <tr><th></th><th>Low WAT-1 (&lt;3)<br><span style="font-weight:400; font-size:11px;">No withdrawal</span></th><th>High WAT-1 (≥3)<br><span style="font-weight:400; font-size:11px;">Withdrawal</span></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="med-name" style="text-align:left;">Target SBS<br><span style="font-size:11px; font-weight:400;">Adequately sedated</span></td>
+              <td style="background:var(--success-bg); color:var(--success); font-weight:600;">Continue weaning</td>
+              <td style="background:var(--warning-bg); color:var(--warning); font-weight:600;">Rescue opioid bolus. Consider increasing drip to pre-wean rate.</td>
+            </tr>
+            <tr>
+              <td class="med-name" style="text-align:left;">High SBS<br><span style="font-size:11px; font-weight:400;">Agitated</span></td>
+              <td style="background:var(--warning-bg); color:var(--warning); font-weight:600;">Inadequate sedation. Rescue opioid bolus or increase dex.</td>
+              <td style="background:var(--accent-bg); color:var(--accent); font-weight:600;">Rescue opioid bolus and increase drip to pre-wean rate.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:14px; font-size:13px; line-height:1.6; color:var(--neutral-dark);">
+          <p><strong>SBS</strong> answers: Is the patient adequately sedated? Target SBS −1 (responsive to gentle touch/voice).</p>
+          <p style="margin-top:6px;"><strong>WAT-1</strong> answers: Is the patient experiencing opioid/benzodiazepine withdrawal? Score ≥3 = withdrawal.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:12px 16px; background:var(--accent-bg); border-radius:var(--radius-sm); font-size:13.5px;">
+      <strong style="color:var(--accent);">Dex caveat:</strong> Alpha-2 agonists can mask withdrawal symptoms (blunting tachycardia, hypertension). WAT-1 does not capture dex-specific withdrawal. Monitor for unexplained hypertension/tachycardia separately when weaning dex.
+    </div>
+
+  </div>
+
 </div>
+
 
 <!-- ═══════════════════════════════════════════ -->
 <!-- POST-SURGERY PANEL                         -->
@@ -973,6 +1033,7 @@
     <button class="section-tab active" data-section="post-scope">Scope</button>
     <button class="section-tab" data-section="post-start">Starting Regimen</button>
     <button class="section-tab" data-section="post-esc">Escalation</button>
+    <button class="section-tab" data-section="post-wean">Weaning</button>
   </div>
 
   <!-- SCOPE -->
@@ -1205,6 +1266,55 @@
 
   </div>
 
+  <!-- WEANING -->
+  <div class="section-panel" id="post-wean">
+
+    <div class="assess-box" style="margin-bottom:20px;">
+      <h4>When to Begin Weaning</h4>
+      <p>No non-procedural PRNs given in the prior <strong>12 hours</strong> with stable hemodynamics and adequate sedation/pain scores.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Wean Protocol</div>
+      <div class="card-body" style="font-size:14px; line-height:1.7;">
+        <p><strong>Opioid:</strong> Reduce by <span class="dose-chip">10%</span> of current rate. Monitor for withdrawal signs.</p>
+        <p style="margin-top:10px;"><strong>Dexmedetomidine:</strong> Reduce by <span class="dose-chip">10%</span> of current rate. Monitor for unexplained hypertension or tachycardia.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">SBS × WAT-1 Decision Matrix</div>
+      <div class="card-body">
+        <table class="med-table" style="text-align:center;">
+          <thead>
+            <tr><th></th><th>Low WAT-1 (&lt;3)<br><span style="font-weight:400; font-size:11px;">No withdrawal</span></th><th>High WAT-1 (≥3)<br><span style="font-weight:400; font-size:11px;">Withdrawal</span></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="med-name" style="text-align:left;">Target SBS<br><span style="font-size:11px; font-weight:400;">Adequately sedated</span></td>
+              <td style="background:var(--success-bg); color:var(--success); font-weight:600;">Continue weaning</td>
+              <td style="background:var(--warning-bg); color:var(--warning); font-weight:600;">Rescue opioid bolus. Consider increasing drip to pre-wean rate.</td>
+            </tr>
+            <tr>
+              <td class="med-name" style="text-align:left;">High SBS<br><span style="font-size:11px; font-weight:400;">Agitated</span></td>
+              <td style="background:var(--warning-bg); color:var(--warning); font-weight:600;">Inadequate sedation. Rescue opioid bolus or increase dex.</td>
+              <td style="background:var(--accent-bg); color:var(--accent); font-weight:600;">Rescue opioid bolus and increase drip to pre-wean rate.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:14px; font-size:13px; line-height:1.6; color:var(--neutral-dark);">
+          <p><strong>SBS</strong> answers: Is the patient adequately sedated? Target SBS −1 (responsive to gentle touch/voice).</p>
+          <p style="margin-top:6px;"><strong>WAT-1</strong> answers: Is the patient experiencing opioid/benzodiazepine withdrawal? Score ≥3 = withdrawal.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:12px 16px; background:var(--accent-bg); border-radius:var(--radius-sm); font-size:13.5px;">
+      <strong style="color:var(--accent);">Dex caveat:</strong> Alpha-2 agonists can mask withdrawal symptoms (blunting tachycardia, hypertension). WAT-1 does not capture dex-specific withdrawal. Monitor for unexplained hypertension/tachycardia separately when weaning dex.
+    </div>
+
+  </div>
+
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
@@ -1268,6 +1378,7 @@
   </div>
 </div>
 
+
 <!-- ═══════════════════════════════════════════ -->
 <!-- IV → ENTERAL BRIDGE PANEL                  -->
 <!-- ═══════════════════════════════════════════ -->
@@ -1310,6 +1421,8 @@
     </div>
   </div>
 </div>
+
+</div><!-- content-wrap -->
 
 <footer class="site-footer">
   Heart Center Neonatal Sedation Guideline · v1.0 · Intubated Neonates &lt; 30 Days
