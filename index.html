@@ -43,9 +43,10 @@
     font-family: var(--font-body);
     color: var(--neutral-dark);
     background: #f5f4f7;
-    line-height: 1.6;
+    line-height: 1.72;
     font-size: 15px;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* ── HEADER ── */
@@ -103,11 +104,10 @@
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--primary-dark);
+    letter-spacing: 0.2em;
+    color: var(--primary);
     margin-bottom: 16px;
     position: relative;
-    opacity: 0.6;
   }
 
   .hero h1 {
@@ -241,11 +241,11 @@
   }
 
   .card-header .badge {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 8px;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 3px 10px;
     border-radius: 20px;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
   }
 
@@ -253,7 +253,7 @@
   .badge-md { background: var(--warning-bg); color: var(--warning); }
   .badge-rescue { background: var(--accent-bg); color: var(--accent); }
 
-  .card-body { padding: 20px 24px; }
+  .card-body { padding: 24px 28px; }
 
   /* ── SCOPE BOXES ── */
   .scope-grid {
@@ -266,7 +266,7 @@
   @media (max-width: 640px) { .scope-grid { grid-template-columns: 1fr; } }
 
   .scope-box {
-    padding: 20px;
+    padding: 22px 24px;
     border-radius: var(--radius-md);
     border: 1px solid;
   }
@@ -298,11 +298,12 @@
   }
 
   .scope-box li {
-    padding: 5px 0;
+    padding: 6px 0;
     font-size: 14px;
     color: var(--neutral-dark);
-    padding-left: 18px;
+    padding-left: 20px;
     position: relative;
+    line-height: 1.55;
   }
 
   .scope-box.include li::before {
@@ -347,14 +348,14 @@
   .med-table thead th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
 
   .med-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--neutral-light);
-    vertical-align: top;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    vertical-align: middle;
   }
 
   .med-table tr:last-child td { border-bottom: none; }
 
-  .med-table tbody tr:hover { background: var(--primary-bg); }
+  .med-table tbody tr:hover { background: rgba(102,41,183,0.03); }
 
   .med-table .med-name {
     font-weight: 600;
@@ -434,16 +435,16 @@
   .flow-step-label.rescue-label { color: var(--accent); }
 
   .flow-step h4 {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--neutral-dark);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 
   .flow-step p, .flow-step ul {
-    font-size: 14px;
-    color: var(--neutral-mid);
-    line-height: 1.65;
+    font-size: 14.5px;
+    color: var(--neutral-dark);
+    line-height: 1.7;
   }
 
   .flow-step ul {
@@ -509,64 +510,66 @@
 
   /* ── ASSESSMENT BOX ── */
   .assess-box {
-    background: var(--primary-bg);
-    border: 1px solid rgba(102,41,183,0.12);
-    border-left: 4px solid var(--primary);
-    padding: 16px 20px;
+    background: rgba(102,41,183,0.04);
+    border: none;
+    border-left: 3px solid var(--primary);
+    padding: 20px 24px;
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .assess-box h4 {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     color: var(--primary);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 8px;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
   }
 
   .assess-box p {
-    font-size: 14px;
+    font-size: 14.5px;
     color: var(--neutral-dark);
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   .assess-box .tool-tag {
     display: inline-block;
     background: var(--white);
-    border: 1px solid var(--primary-light);
-    color: var(--primary);
+    border: 1px solid rgba(102,41,183,0.15);
+    color: var(--primary-dark);
     font-size: 12px;
     font-weight: 600;
-    padding: 2px 10px;
+    padding: 3px 12px;
     border-radius: 20px;
-    margin: 2px 4px 2px 0;
+    margin: 3px 4px 3px 0;
   }
 
   /* ── TRIGGER BOX ── */
   .trigger-box {
-    background: var(--warning-bg);
-    border: 1px solid rgba(198,122,14,0.15);
-    border-left: 4px solid var(--warning);
-    padding: 14px 20px;
+    background: rgba(198,122,14,0.05);
+    border: none;
+    border-left: 3px solid var(--warning);
+    padding: 18px 24px;
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    margin: 16px 0;
-    font-size: 14px;
+    margin: 20px 0;
+    font-size: 14.5px;
     color: var(--neutral-dark);
+    line-height: 1.7;
   }
 
   .trigger-box strong { color: var(--warning); }
 
   /* ── ALERT BOX ── */
   .alert-box {
-    background: var(--accent-bg);
-    border: 1px solid rgba(237,41,57,0.12);
-    border-left: 4px solid var(--accent);
-    padding: 14px 20px;
+    background: rgba(237,41,57,0.04);
+    border: none;
+    border-left: 3px solid var(--accent);
+    padding: 18px 24px;
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    margin: 16px 0;
-    font-size: 14px;
+    margin: 20px 0;
+    font-size: 14.5px;
+    line-height: 1.7;
   }
 
   .alert-box strong { color: var(--accent); }
@@ -650,13 +653,14 @@
   @media (max-width: 640px) { .choice-grid { grid-template-columns: 1fr; } }
 
   .choice-option {
-    padding: 14px 18px;
+    padding: 16px 20px;
     border-radius: var(--radius-md);
-    border: 2px solid var(--neutral-light);
+    border: 1.5px solid rgba(0,0,0,0.06);
     text-align: center;
+    transition: border-color 0.2s;
   }
 
-  .choice-option.preferred { border-color: var(--primary); background: var(--primary-bg); }
+  .choice-option.preferred { border-color: rgba(102,41,183,0.2); background: rgba(102,41,183,0.03); }
 
   .choice-option .choice-label {
     font-size: 11px;
@@ -699,8 +703,9 @@
     .hero { padding: 40px 20px 32px; }
     .hero h1 { font-size: 26px; }
     .content-wrap { padding: 0 16px 40px; }
-    .card-body { padding: 16px 18px; }
+    .card-body { padding: 20px 20px; }
     .flow { padding-left: 28px; }
+    .assess-box, .trigger-box, .alert-box { padding: 16px 20px; }
   }
 
   /* ── ANIMATIONS ── */
@@ -729,10 +734,11 @@
   .rule-item {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    padding: 10px 0;
-    font-size: 14px;
+    gap: 12px;
+    padding: 12px 0;
+    font-size: 14.5px;
     color: var(--neutral-dark);
+    line-height: 1.65;
   }
 
   .rule-icon {
@@ -1225,12 +1231,12 @@
         <p>Increase drip incrementally based on assessment scores:</p>
         <div class="choice-grid" style="margin-top:10px;">
           <div class="choice-option preferred">
-            <div class="choice-label">If Pain inadequate</div>
+            <div class="choice-label">If Pain Control Inadequate</div>
             <div class="choice-drug" style="font-size:13px;">Morphine <span class="dose-chip">+0.01 mg/kg/hr</span></div>
             <div class="choice-drug" style="font-size:13px; margin-top:4px;">Fentanyl <span class="dose-chip">+0.5 mcg/kg/hr</span></div>
           </div>
           <div class="choice-option preferred">
-            <div class="choice-label">If Sedation inadequate</div>
+            <div class="choice-label">If Sedation Inadequate</div>
             <div class="choice-drug" style="font-size:13px;">Dex <span class="dose-chip">+0.1 mcg/kg/hr</span></div>
           </div>
         </div>
@@ -1247,12 +1253,12 @@
         <p>Repeat the same incremental increase:</p>
         <div class="choice-grid" style="margin-top:10px;">
           <div class="choice-option preferred">
-            <div class="choice-label">If Pain inadequate</div>
+            <div class="choice-label">If Pain Control Inadequate</div>
             <div class="choice-drug" style="font-size:13px;">Morphine <span class="dose-chip">+0.01 mg/kg/hr</span></div>
             <div class="choice-drug" style="font-size:13px; margin-top:4px;">Fentanyl <span class="dose-chip">+0.5 mcg/kg/hr</span></div>
           </div>
           <div class="choice-option preferred">
-            <div class="choice-label">If Sedation inadequate</div>
+            <div class="choice-label">If Sedation Inadequate</div>
             <div class="choice-drug" style="font-size:13px;">Dex <span class="dose-chip">+0.1 mcg/kg/hr</span></div>
           </div>
         </div>
