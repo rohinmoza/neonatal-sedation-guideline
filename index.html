@@ -42,7 +42,7 @@
   body {
     font-family: var(--font-body);
     color: var(--neutral-dark);
-    background: var(--neutral-bg);
+    background: #f5f4f7;
     line-height: 1.6;
     font-size: 15px;
     -webkit-font-smoothing: antialiased;
@@ -56,8 +56,8 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(12px);
-    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(16px);
+    background: rgba(255,255,255,0.97);
   }
 
   .header-top {
@@ -70,50 +70,73 @@
   }
 
   .header-title {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--primary);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
   .header-version {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--neutral-mid);
-    font-weight: 400;
+    font-weight: 500;
+    background: var(--neutral-bg);
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--neutral-light);
   }
 
   /* ── HERO ── */
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
+
   .hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: var(--white);
-    padding: 52px 28px 42px;
+    background: var(--white);
+    color: var(--neutral-dark);
+    padding: 56px 28px 44px;
     text-align: center;
     position: relative;
-    overflow: hidden;
+    border-bottom: 2px solid rgba(102,41,183,0.12);
   }
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 80%, rgba(0,0,0,0.12) 0%, transparent 50%);
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    position: relative;
+    opacity: 0.6;
   }
 
   .hero h1 {
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--primary-dark);
     position: relative;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .hero .divider {
+    width: 40px;
+    height: 3px;
+    background: var(--primary);
+    margin: 0 auto 16px;
+    position: relative;
   }
 
   .hero .subtitle {
-    font-size: 16px;
-    font-weight: 400;
-    opacity: 0.88;
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--primary-dark);
+    opacity: 0.55;
     position: relative;
+    text-transform: uppercase;
   }
 
   /* ── PRIMARY TABS (Pre / Post) ── */
@@ -129,21 +152,22 @@
   .pathway-tab {
     flex: 1;
     padding: 14px 20px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     text-align: center;
     cursor: pointer;
     border: none;
     background: none;
     color: var(--neutral-mid);
-    border-bottom: 3px solid transparent;
-    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+    transition: all 0.25s ease;
     font-family: var(--font-body);
-    letter-spacing: 0.01em;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 
-  .pathway-tab:hover { color: var(--primary); background: var(--primary-bg); }
-  .pathway-tab.active { color: var(--primary); border-bottom-color: var(--primary); background: var(--primary-bg); }
+  .pathway-tab:hover { color: var(--primary); }
+  .pathway-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
 
   /* ── CONTENT ── */
   .content-wrap {
@@ -159,54 +183,61 @@
   .section-tabs {
     display: flex;
     gap: 2px;
-    margin: 24px 0 0;
-    background: var(--neutral-light);
+    margin: 28px 0 0;
+    background: rgba(0,0,0,0.04);
     border-radius: var(--radius-md);
-    padding: 3px;
+    padding: 4px;
     overflow-x: auto;
   }
 
   .section-tab {
     flex: 1;
     padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 12.5px;
+    font-weight: 600;
     text-align: center;
     cursor: pointer;
     border: none;
     background: none;
     color: var(--neutral-mid);
-    border-radius: var(--radius-sm);
-    transition: all 0.2s ease;
+    border-radius: calc(var(--radius-md) - 2px);
+    transition: all 0.25s ease;
     font-family: var(--font-body);
     white-space: nowrap;
+    letter-spacing: 0.01em;
   }
 
-  .section-tab:hover { color: var(--neutral-dark); background: rgba(255,255,255,0.6); }
-  .section-tab.active { color: var(--primary); background: var(--white); box-shadow: var(--shadow-sm); font-weight: 600; }
+  .section-tab:hover { color: var(--neutral-dark); background: rgba(255,255,255,0.5); }
+  .section-tab.active { color: var(--primary-dark); background: var(--white); box-shadow: 0 1px 4px rgba(0,0,0,0.07); font-weight: 700; }
 
-  .section-panel { display: none; padding-top: 24px; }
+  .section-panel { display: none; padding-top: 28px; }
   .section-panel.active { display: block; }
 
   /* ── CARDS ── */
   .card {
     background: var(--white);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid rgba(0,0,0,0.04);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.06);
     margin-bottom: 20px;
     overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
   }
 
   .card-header {
     padding: 18px 24px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
-    color: var(--primary);
-    border-bottom: 1px solid var(--neutral-light);
+    color: var(--primary-dark);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
     display: flex;
     align-items: center;
     gap: 10px;
+    letter-spacing: 0.01em;
   }
 
   .card-header .badge {
@@ -301,14 +332,15 @@
   }
 
   .med-table thead th {
-    background: var(--primary);
-    color: var(--white);
+    background: var(--primary-bg);
+    color: var(--primary-dark);
     padding: 12px 16px;
-    font-weight: 600;
-    font-size: 12px;
+    font-weight: 700;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-align: left;
+    border-bottom: 2px solid rgba(102,41,183,0.15);
   }
 
   .med-table thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
@@ -355,31 +387,31 @@
     top: 8px;
     bottom: 8px;
     width: 2px;
-    background: linear-gradient(to bottom, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    background: linear-gradient(to bottom, var(--primary-light) 0%, rgba(102,41,183,0.2) 100%);
     border-radius: 2px;
   }
 
   .flow-step {
     position: relative;
     margin-bottom: 20px;
-    padding: 16px 20px;
+    padding: 18px 22px;
     background: var(--white);
     border-radius: var(--radius-md);
-    border: 1px solid var(--neutral-light);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: border-color 0.25s, box-shadow 0.25s;
   }
 
-  .flow-step:hover { border-color: var(--primary-light); box-shadow: var(--shadow-sm); }
+  .flow-step:hover { border-color: var(--primary-light); box-shadow: 0 2px 8px rgba(102,41,183,0.06); }
 
   .flow-step::before {
     content: '';
     position: absolute;
     left: -27px;
-    top: 20px;
-    width: 12px;
-    height: 12px;
+    top: 22px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    border: 2.5px solid var(--primary);
+    border: 2px solid var(--primary);
     background: var(--white);
   }
 
@@ -434,34 +466,35 @@
 
   .flow-connector {
     text-align: center;
-    padding: 4px 0;
-    font-size: 12px;
+    padding: 6px 0;
+    font-size: 11px;
     font-weight: 600;
-    color: var(--accent);
-    letter-spacing: 0.04em;
+    color: var(--neutral-mid);
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     position: relative;
   }
 
   .flow-connector::before {
-    content: '▼';
+    content: '↓';
     display: block;
-    font-size: 10px;
+    font-size: 12px;
     margin-bottom: 2px;
-    color: var(--accent);
+    color: var(--primary-light);
   }
 
   /* ── DOSE CHIP ── */
   .dose-chip {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 500;
     background: var(--primary-bg);
     color: var(--primary-dark);
-    padding: 2px 8px;
+    padding: 2px 10px;
     border-radius: 4px;
     margin: 1px 2px;
+    letter-spacing: 0.01em;
   }
 
   .dose-chip.alt {
@@ -652,17 +685,19 @@
   /* ── FOOTER ── */
   .site-footer {
     text-align: center;
-    padding: 24px 28px;
-    font-size: 12px;
+    padding: 28px 28px;
+    font-size: 11px;
+    font-weight: 500;
     color: var(--neutral-mid);
+    letter-spacing: 0.04em;
     border-top: 1px solid var(--neutral-light);
     background: var(--white);
   }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .hero { padding: 36px 20px 30px; }
-    .hero h1 { font-size: 24px; }
+    .hero { padding: 40px 20px 32px; }
+    .hero h1 { font-size: 26px; }
     .content-wrap { padding: 0 16px 40px; }
     .card-body { padding: 16px 18px; }
     .flow { padding-left: 28px; }
@@ -720,18 +755,18 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 14px 18px;
-    background: var(--primary-bg);
-    border: 1.5px solid rgba(102,41,183,0.18);
+    padding: 14px 20px;
+    background: rgba(102,41,183,0.03);
+    border: 1px solid rgba(102,41,183,0.08);
     border-radius: var(--radius-md);
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 
   .nonpharm-strip-label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: var(--primary);
   }
 
@@ -743,12 +778,12 @@
   }
 
   .nonpharm-chip {
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 500;
     color: var(--primary-dark);
     background: var(--white);
-    border: 1px solid rgba(102,41,183,0.2);
-    padding: 5px 14px;
+    border: 1px solid rgba(102,41,183,0.12);
+    padding: 4px 14px;
     border-radius: 20px;
     white-space: nowrap;
   }
@@ -772,8 +807,10 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-eyebrow">Heart Center Clinical Guideline</div>
   <h1>Neonatal Sedation &amp; Analgesia</h1>
-  <p class="subtitle">Intubated Neonates &lt; 30 Days · Pre- &amp; Post-Cardiac Surgery</p>
+  <div class="divider"></div>
+  <p class="subtitle">Intubated Neonates &lt; 30 Days &ensp;·&ensp; Pre- &amp; Post-Cardiac Surgery</p>
 </section>
 
 <div class="content-wrap">
@@ -1350,19 +1387,24 @@
             <td class="dose">0.1–1.4 mcg/kg/hr</td>
           </tr>
           <tr>
+            <td class="med-name">Clonidine</td>
+            <td class="dose">—</td>
+            <td class="dose">0.5–2.5 mcg/kg Q6H</td>
+          </tr>
+          <tr>
             <td class="med-name">Midazolam</td>
             <td class="dose">—</td>
             <td class="dose">0.025 mg/kg Q4H PRN</td>
           </tr>
           <tr>
-            <td class="med-name">Ketamine</td>
-            <td class="dose">0.1–0.5 mg/kg/hr</td>
-            <td class="dose">0.1–1 mg/kg/hr</td>
+            <td class="med-name">Ketamine (bolus)</td>
+            <td class="dose">—</td>
+            <td class="dose">0.5 mg/kg Q4H PRN</td>
           </tr>
           <tr>
-            <td class="med-name">Clonidine</td>
-            <td class="dose">—</td>
-            <td class="dose">0.5–2.5 mcg/kg Q6H</td>
+            <td class="med-name">Ketamine (drip)</td>
+            <td class="dose">0.1–0.5 mg/kg/hr</td>
+            <td class="dose">0.1–1 mg/kg/hr</td>
           </tr>
           <tr>
             <td class="med-name">Acetaminophen</td>
@@ -1383,19 +1425,19 @@
 <!-- IV → ENTERAL BRIDGE PANEL                  -->
 <!-- ═══════════════════════════════════════════ -->
 <div class="pathway-panel" id="panel-bridge">
-  <div class="alert-box" style="margin-bottom:20px;">
-    <strong>IV → Enteral Bridging:</strong> Do not start enteral agent until first step of IV agent wean is anticipated within 12 hours of first enteral dose.
+  <div style="margin-bottom:24px; padding:16px 20px; background:var(--neutral-bg); border-radius:var(--radius-md); font-size:14px; line-height:1.7; border:1px solid var(--neutral-light);">
+    <p><strong>Only start enteral bridge if you expect the IV drip off within 48–72 hours.</strong> After tolerating 2–3 enteral doses, begin stepwise drip reduction. Not all patients on dex need clonidine; many can wean dex alone.</p>
+    <p style="margin-top:10px;">At transfer, <strong>explicitly communicate all sedative wean plans to the floor team</strong>.</p>
   </div>
 
   <!-- CLONIDINE -->
   <div class="card">
     <div class="card-header" style="color:var(--primary);">Dex → Clonidine</div>
     <div class="card-body" style="font-size:14px; line-height:1.7;">
-      <p><strong>Start when:</strong> Dex exposure <span class="dose-chip">≥ 7 days</span> &nbsp;and&nbsp; Dex gtt <span class="dose-chip">&lt; 1 mcg/kg/hr</span></p>
-      <p style="margin-top:10px;"><strong>Wean target:</strong> Dex off within <strong>48–72 hours</strong> of starting clonidine.</p>
-      <p style="margin-top:10px;"><strong>If unlikely to wean in that window:</strong> Discontinue clonidine and continue dex gtt wean alone. Clonidine is not always necessary. Dex-only wean can also be completed on the floor.</p>
-      <div style="margin-top:14px; padding:12px 16px; background:var(--accent-bg); border-radius:var(--radius-sm); font-size:13.5px;">
-        <strong style="color:var(--accent);">Clonidine ≠ Dex.</strong> 8× lower α-2 selectivity. Increasing the dose will not replicate dex's sedation profile. Use within dosing range as a <em>weaning bridge only.</em>
+      <p><strong>Start when:</strong> Dex exposure <span class="dose-chip">≥ 7 days</span> and gtt <span class="dose-chip">&lt; 1 mcg/kg/hr</span></p>
+      <p style="margin-top:10px;"><strong>Not tolerating?</strong> Stop clonidine and continue dex-only wean.</p>
+      <div style="margin-top:14px; padding:10px 16px; background:var(--accent-bg); border-radius:var(--radius-sm); font-size:13px;">
+        <strong style="color:var(--accent);">Clonidine ≠ Dex.</strong> Clonidine has 8× lower α-2 selectivity than dex. Dose escalation will not replicate dex. <em>Weaning bridge only.</em>
       </div>
     </div>
   </div>
@@ -1404,20 +1446,18 @@
   <div class="card">
     <div class="card-header" style="color:var(--primary);">Opioid → Morphine / Methadone</div>
     <div class="card-body" style="font-size:14px; line-height:1.7;">
-      <p><strong>Start when:</strong> Opioid exposure <span class="dose-chip">≥ 5 days</span> &nbsp;and&nbsp; Morphine gtt <span class="dose-chip">&lt; 0.15 mg/kg/hr</span> &nbsp;<em>or</em>&nbsp; Fentanyl gtt <span class="dose-chip">&lt; 2 mcg/kg/hr</span></p>
-      <p style="margin-top:14px;"><strong>Agent selection:</strong></p>
-      <div class="choice-grid" style="margin-top:8px;">
+      <p><strong>Start when:</strong> Opioid exposure <span class="dose-chip">≥ 5 days</span> and Morphine gtt <span class="dose-chip">&lt; 0.15 mg/kg/hr</span> <em>or</em> Fentanyl gtt <span class="dose-chip">&lt; 2 mcg/kg/hr</span></p>
+      <div class="choice-grid" style="margin-top:14px;">
         <div class="choice-option preferred">
-          <div class="choice-label">Exposure &lt; 2 Weeks</div>
+          <div class="choice-label">Opioid Exposure &lt; 2 Weeks</div>
           <div class="choice-drug">Morphine</div>
         </div>
         <div class="choice-option preferred">
-          <div class="choice-label">Exposure &gt; 2 Weeks</div>
+          <div class="choice-label">Opioid Exposure &gt; 2 Weeks</div>
           <div class="choice-drug">Methadone</div>
         </div>
       </div>
-      <p style="margin-top:14px;"><strong>Wean target:</strong> IV opioid off within <strong>48–72 hours</strong> of starting enteral agent.</p>
-      <p style="margin-top:10px;"><strong>Conversion:</strong> Determine opioid equipotent conversion <strong>in discussion with Pharmacy</strong>.</p>
+      <p style="margin-top:14px;"><strong>Conversion:</strong> Determine equipotent dose <strong>with Pharmacy</strong>.</p>
     </div>
   </div>
 </div>
