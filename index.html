@@ -486,11 +486,8 @@
   }
 
   .flow-connector::before {
-    content: '↓';
+    content: '';
     display: block;
-    font-size: 12px;
-    margin-bottom: 2px;
-    color: var(--primary-light);
   }
 
   /* ── DOSE CHIP ── */
@@ -904,7 +901,7 @@
     <span class="header-version">v1.0</span>
   </div>
   <nav class="pathway-tabs" id="pathwayTabs">
-    <button class="pathway-tab active" data-panel="pre">Pre-Surgery Pathway</button>
+    <button class="pathway-tab active" data-panel="pre">Pre-Surgery / Non-Surgical</button>
     <button class="pathway-tab" data-panel="post">Post-Surgery Pathway</button>
     <button class="pathway-tab" data-panel="bridge">IV → Enteral Bridge</button>
     <button class="pathway-tab" data-panel="dosing">Dosing Reference</button>
@@ -930,7 +927,7 @@
     <button class="section-tab active" data-section="pre-scope">Scope</button>
     <button class="section-tab" data-section="pre-start">Starting Regimen</button>
     <button class="section-tab" data-section="pre-esc">Escalation</button>
-    <button class="section-tab" data-section="pre-wean">Weaning</button>
+    <button class="section-tab" data-section="pre-wean">Comfort Weaning</button>
   </div>
 
   <!-- SCOPE -->
@@ -941,6 +938,7 @@
         <ul>
           <li>Intubated neonates &lt; 30 days of age</li>
           <li>Pre-cardiac surgery</li>
+          <li>Non-surgical patients</li>
         </ul>
       </div>
       <div class="scope-box exclude">
@@ -965,6 +963,7 @@
         <strong>Scheduled:</strong> Every 4 hours &nbsp;|&nbsp;
         <strong>Escalation reassessment:</strong> Every 30 minutes
       </p>
+      <p style="margin-top:8px; font-style:italic; color:var(--neutral-mid);">Set and communicate a sedation/analgesia goal score with your bedside team.</p>
     </div>
   </div>
 
@@ -976,7 +975,6 @@
         <span class="nonpharm-chip">Cluster cares</span>
         <span class="nonpharm-chip">Swaddling</span>
         <span class="nonpharm-chip">Minimize noise/light</span>
-        <span class="nonpharm-chip">Topical anesthetics</span>
         <span class="nonpharm-chip">Family contact</span>
       </div>
     </div>
@@ -990,8 +988,8 @@
           <tbody>
             <tr>
               <td class="med-name">Acetaminophen</td>
-              <td class="dose">10 mg/kg</td>
-              <td>IV Q4H PRN</td>
+              <td class="dose">15 mg/kg</td>
+              <td>IV Q6H PRN</td>
             </tr>
             <tr>
               <td class="med-name">Dexmedetomidine</td>
@@ -1020,20 +1018,46 @@
         <span class="nonpharm-chip">Cluster cares</span>
         <span class="nonpharm-chip">Swaddling</span>
         <span class="nonpharm-chip">Minimize noise/light</span>
-        <span class="nonpharm-chip">Topical anesthetics</span>
         <span class="nonpharm-chip">Family contact</span>
       </div>
     </div>
-    <div class="assess-box" style="margin-bottom:20px;">
-      <h4>Assessment &amp; Escalation Triggers</h4>
-      <p>Assess sedation and pain scores every 4 hours. If inadequate, begin escalation below.</p>
-      <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(102,41,183,0.12);">
-        <p style="margin:0;">
-          <span class="tool-tag" style="background:var(--warning-bg); border-color:var(--warning); color:var(--warning);">&gt; 3 PRNs in 6h</span> → increase drip &nbsp;&nbsp;
-          <span class="tool-tag" style="background:var(--warning-bg); border-color:var(--warning); color:var(--warning);">&gt; 6 PRNs in 12h</span> → further increase
-        </p>
-        <p style="margin-top:6px; font-size:12px; color:var(--neutral-mid);">Non-procedural PRNs only. Do <strong>not</strong> count procedural sedation doses.</p>
+
+    <!-- ASSESSMENT & PRN RULES -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-header">Assessment &amp; Drip Adjustment Rules</div>
+      <div class="card-body" style="font-size:14px; line-height:1.7;">
+        <p>Assess sedation and pain scores <strong>every 4 hours</strong>. Reassess <strong>30 min</strong> after any intervention. Review PRN counts <strong>every morning on rounds</strong> and after resolving any escalation.</p>
+        <div style="margin-top:14px; padding-top:14px; border-top:1px solid rgba(0,0,0,0.06);">
+          <p><strong>&gt; 3 non-procedural PRNs in 6h</strong> or <strong>&gt; 6 in 12h</strong> → increase drip per increments below:</p>
+          <p style="margin-top:8px; font-family:var(--font-mono); font-size:13px; color:var(--primary-dark);">
+            Morphine <span class="dose-chip">+0.01 mg/kg/hr</span> &nbsp; Fentanyl <span class="dose-chip">+0.5 mcg/kg/hr</span> &nbsp; Dexmedetomidine <span class="dose-chip">+0.1 mcg/kg/hr</span>
+          </p>
+        </div>
       </div>
+    </div>
+
+    <!-- DECISION GATE -->
+    <div style="margin-bottom:24px;">
+      <div style="font-size:14.5px; color:var(--neutral-dark); margin-bottom:14px; line-height:1.7;">
+        If pain or sedation is out of goal range, <strong>determine your starting point:</strong>
+      </div>
+      <div class="choice-grid">
+        <div class="choice-option preferred">
+          <div class="choice-label">On Dexmedetomidine Only</div>
+          <div class="choice-drug">↓ Step 1 Below</div>
+          <div style="font-size:12px; color:var(--neutral-mid); margin-top:4px;">Restart from Step 1 for each new episode</div>
+        </div>
+        <div class="choice-option preferred">
+          <div class="choice-label">Already on Dexmedetomidine + Opioid Drip</div>
+          <div class="choice-drug">→ Post-Surgery Escalation Step 1</div>
+          <div style="font-size:12px; color:var(--neutral-mid); margin-top:4px;">Matching opioid bolus, score-driven drip titration</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOW: DEX ONLY PATH -->
+    <div style="margin-bottom:12px; font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.06em;">
+      Dexmedetomidine Only — Escalation Steps
     </div>
 
     <div class="flow">
@@ -1043,24 +1067,24 @@
         <div class="flow-step-label rn">
           <span class="badge badge-rn">RN Directed</span> Step 1
         </div>
-        <h4>Bolus Morphine</h4>
-        <p>Administer a single dose of morphine <span class="dose-chip">0.025 mg/kg</span>.</p>
-        <p style="margin-top:6px;"><strong>Wait 30 min</strong> — observe for effectiveness of morphine.</p>
+        <h4>Morphine Bolus + IV Acetaminophen</h4>
+        <p>Give morphine <span class="dose-chip">0.025 mg/kg</span> + acetaminophen <span class="dose-chip alt">15 mg/kg IV</span>.</p>
+        <p style="margin-top:6px;">Reassess in <strong>30 min</strong>. If patient improves, stop here.</p>
       </div>
 
-      <div class="flow-connector">If still inadequate</div>
+      <div class="flow-connector">If out of goal range ↓</div>
 
       <!-- Step 2 -->
       <div class="flow-step">
         <div class="flow-step-label rn">
           <span class="badge badge-rn">RN Directed</span> Step 2
         </div>
-        <h4>Bolus Morphine + IV Tylenol</h4>
-        <p>Administer another morphine dose <span class="dose-chip">0.025 mg/kg</span> + <span class="dose-chip alt">IV Acetaminophen 10 mg/kg</span>.</p>
-        <p style="margin-top:6px;"><strong>Wait 30 min</strong> — observe for effectiveness of combined treatment.</p>
+        <h4>Morphine Bolus</h4>
+        <p>Give morphine <span class="dose-chip">0.025 mg/kg</span>.</p>
+        <p style="margin-top:6px;">Reassess in <strong>30 min</strong>. If patient improves, stop here.</p>
       </div>
 
-      <div class="flow-connector">If still inadequate</div>
+      <div class="flow-connector">If out of goal range ↓</div>
 
       <!-- Step 3 -->
       <div class="flow-step escalation">
@@ -1068,13 +1092,11 @@
           <span class="badge badge-md">Notify Provider</span> Step 3
         </div>
         <h4>Increase Dexmedetomidine</h4>
-        <p>Adjust the dexmedetomidine infusion rate up to <span class="dose-chip">0.5 mcg/kg/hr</span>.</p>
-        <p style="margin-top:6px;"><strong>Wait 30 min</strong> — observe for effectiveness of dexmedetomidine.</p>
+        <p>Increase dexmedetomidine infusion to <span class="dose-chip">0.5 mcg/kg/hr</span> (if currently below this).</p>
+        <p style="margin-top:6px;">Reassess in <strong>30 min</strong>.</p>
       </div>
 
-      <div class="flow-connector">If still inadequate</div>
-
-      <div class="flow-connector" style="background:var(--primary-bg); border:1px solid rgba(102,41,183,0.15); border-radius:var(--radius-sm); padding:8px 16px; font-weight:600; color:var(--primary);">Patient now on both continuous dex + continuous opioid from this step forward</div>
+      <div class="flow-connector">If out of goal range ↓</div>
 
       <!-- Step 4 -->
       <div class="flow-step escalation">
@@ -1082,35 +1104,15 @@
           <span class="badge badge-md">Provider</span> Step 4
         </div>
         <h4>Start Morphine Drip</h4>
-        <p>Initiate a continuous morphine infusion at <span class="dose-chip">0.02 mg/kg/hr</span>.</p>
-      </div>
-
-      <div class="flow-connector">If still inadequate</div>
-
-      <!-- Step 5 -->
-      <div class="flow-step escalation">
-        <div class="flow-step-label md">
-          <span class="badge badge-md">Provider</span> Step 5
+        <p>Start continuous morphine at <span class="dose-chip">0.02 mg/kg/hr</span>.</p>
+        <div style="margin-top:10px; padding:10px 14px; background:var(--primary-bg); border-radius:var(--radius-sm); font-size:13px;">
+          Patient is now on both drips. For all subsequent episodes, follow <strong>Post-Surgery Escalation Step 1</strong>.
         </div>
-        <h4>Repeat Morphine Bolus up to 3 Times</h4>
-        <p>Administer additional morphine boluses <span class="dose-chip">0.025 mg/kg</span> if needed.</p>
-        <p style="margin-top:6px;"><strong>Reassess every 30 min</strong> — evaluate pain levels frequently between each bolus.</p>
-      </div>
-
-      <div class="flow-connector">If still inadequate</div>
-
-      <!-- Step 6 -->
-      <div class="flow-step escalation">
-        <div class="flow-step-label md">
-          <span class="badge badge-md">Provider</span> Step 6
-        </div>
-        <h4>Increase Morphine Drip</h4>
-        <p>Increase by <span class="dose-chip">+0.01 mg/kg/hr</span> increments.</p>
       </div>
 
     </div>
 
-    <div class="alert-box">
+    <div class="alert-box" style="margin-top:20px;">
       <strong>⚑</strong> No ketamine or midazolam in the preoperative phase.
     </div>
   </div>
@@ -1126,17 +1128,20 @@
     <div class="card">
       <div class="card-header">Wean Protocol</div>
       <div class="card-body" style="font-size:14px; line-height:1.7;">
-        <p><strong>If on continuous dex only (no opioid drip):</strong> Wean dex first. Reduce by <span class="dose-chip">10%</span> of current rate. Monitor for unexplained hypertension or tachycardia.</p>
-        <p style="margin-top:10px;"><strong>If on both continuous opioid and dex:</strong> Reduce opioid by <span class="dose-chip">10%</span> of current rate. Monitor for withdrawal signs. Wean dex after opioid wean is underway.</p>
+        <p><strong>If on continuous dexmedetomidine only (no opioid drip):</strong> Wean dexmedetomidine first. Reduce by <span class="dose-chip">10%</span> of current rate. Monitor for unexplained hypertension or tachycardia.</p>
+        <p style="margin-top:10px;"><strong>If on both continuous opioid and dexmedetomidine:</strong> Reduce opioid by <span class="dose-chip">10%</span> of current rate. Monitor for withdrawal signs. Wean dexmedetomidine after opioid wean is underway.</p>
+        <div style="margin-top:14px; padding:12px 16px; background:var(--neutral-bg); border-radius:var(--radius-sm); font-size:13px; color:var(--neutral-dark);">
+          <strong>Precision when writing wean rates:</strong> Fentanyl to <strong>1 decimal place</strong> (e.g. 1.2 mcg/kg/hr), morphine to <strong>3 decimal places</strong> (e.g. 0.018 mg/kg/hr), dexmedetomidine to <strong>1 decimal place</strong> (e.g. 0.4 mcg/kg/hr).
+        </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-header">SBS × WAT-1 Decision Matrix</div>
+      <div class="card-header">SBS × WAT-1 Decision Matrix — In Response to an Attempted Wean</div>
       <div class="card-body">
         <table class="med-table" style="text-align:center;">
           <thead>
-            <tr><th></th><th>Low WAT-1 (&lt;3)<br><span style="font-weight:400; font-size:11px;">No withdrawal</span></th><th>High WAT-1 (≥3)<br><span style="font-weight:400; font-size:11px;">Withdrawal</span></th></tr>
+            <tr><th></th><th>Low WAT-1 (&lt;4)<br><span style="font-weight:400; font-size:11px;">No withdrawal</span></th><th>High WAT-1 (≥4)<br><span style="font-weight:400; font-size:11px;">Withdrawal</span></th></tr>
           </thead>
           <tbody>
             <tr>
@@ -1146,20 +1151,20 @@
             </tr>
             <tr>
               <td class="med-name" style="text-align:left;">High SBS<br><span style="font-size:11px; font-weight:400;">Agitated</span></td>
-              <td style="background:var(--warning-bg); color:var(--warning); font-weight:600;">Inadequate sedation. Rescue opioid bolus or increase dex.</td>
+              <td style="background:var(--warning-bg); color:var(--warning); font-weight:600;">Inadequate sedation. Rescue opioid bolus or increase dexmedetomidine.</td>
               <td style="background:var(--accent-bg); color:var(--accent); font-weight:600;">Rescue opioid bolus and increase drip to pre-wean rate.</td>
             </tr>
           </tbody>
         </table>
         <div style="margin-top:14px; font-size:13px; line-height:1.6; color:var(--neutral-dark);">
           <p><strong>SBS</strong> answers: Is the patient adequately sedated? Target SBS −1 (responsive to gentle touch/voice).</p>
-          <p style="margin-top:6px;"><strong>WAT-1</strong> answers: Is the patient experiencing opioid/benzodiazepine withdrawal? Score ≥3 = withdrawal.</p>
+          <p style="margin-top:6px;"><strong>WAT-1</strong> answers: Is the patient experiencing opioid/benzodiazepine withdrawal? Score ≥4 = withdrawal.</p>
         </div>
       </div>
     </div>
 
     <div style="padding:12px 16px; background:var(--accent-bg); border-radius:var(--radius-sm); font-size:13.5px;">
-      <strong style="color:var(--accent);">Dex caveat:</strong> Alpha-2 agonists can mask withdrawal symptoms (blunting tachycardia, hypertension). WAT-1 does not capture dex-specific withdrawal. Monitor for unexplained hypertension/tachycardia separately when weaning dex.
+      <strong style="color:var(--accent);">Dexmedetomidine caveat:</strong> Alpha-2 agonists can mask withdrawal symptoms (blunting tachycardia, hypertension). WAT-1 does not capture dexmedetomidine-specific withdrawal. Monitor for unexplained hypertension/tachycardia separately when weaning dexmedetomidine.
     </div>
 
   </div>
@@ -1176,7 +1181,7 @@
     <button class="section-tab active" data-section="post-scope">Scope</button>
     <button class="section-tab" data-section="post-start">Starting Regimen</button>
     <button class="section-tab" data-section="post-esc">Escalation</button>
-    <button class="section-tab" data-section="post-wean">Weaning</button>
+    <button class="section-tab" data-section="post-wean">Comfort Weaning</button>
   </div>
 
   <!-- SCOPE -->
@@ -1211,6 +1216,7 @@
         <strong>Scheduled:</strong> Every 4 hours &nbsp;|&nbsp;
         <strong>Escalation reassessment:</strong> Every 30 minutes
       </p>
+      <p style="margin-top:8px; font-style:italic; color:var(--neutral-mid);">Set and communicate a sedation/analgesia goal score with your bedside team.</p>
     </div>
   </div>
 
@@ -1222,7 +1228,6 @@
         <span class="nonpharm-chip">Cluster cares</span>
         <span class="nonpharm-chip">Swaddling</span>
         <span class="nonpharm-chip">Minimize noise/light</span>
-        <span class="nonpharm-chip">Topical anesthetics</span>
         <span class="nonpharm-chip">Family contact</span>
       </div>
     </div>
@@ -1237,8 +1242,8 @@
           <tbody>
             <tr>
               <td class="med-name">Acetaminophen</td>
-              <td class="dose">10 mg/kg</td>
-              <td>IV Q4H × 72 hours (scheduled)</td>
+              <td class="dose">15 mg/kg</td>
+              <td>IV Q6H × 72 hours (scheduled)</td>
             </tr>
             <tr>
               <td class="med-name">Dexmedetomidine</td>
@@ -1268,6 +1273,11 @@
         <div class="trigger-box" style="margin-top:16px;">
           <strong>⚑ Hydromorphone</strong> reserved for difficult sedation, opioid tachyphylaxis, ECMO, or renal insufficiency. Not part of standard pathway.
         </div>
+
+        <div class="assess-box" style="margin-top:16px;">
+          <h4>Returning from OR on Fentanyl</h4>
+          <p>Reduce fentanyl to <span class="dose-chip">0.5 mcg/kg/hr</span>, order morphine drip at <span class="dose-chip">0.02 mg/kg/hr</span>, and switch drips when morphine arrives from pharmacy.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1281,21 +1291,26 @@
         <span class="nonpharm-chip">Cluster cares</span>
         <span class="nonpharm-chip">Swaddling</span>
         <span class="nonpharm-chip">Minimize noise/light</span>
-        <span class="nonpharm-chip">Topical anesthetics</span>
         <span class="nonpharm-chip">Family contact</span>
       </div>
     </div>
 
-    <div class="assess-box" style="margin-bottom:20px;">
-      <h4>Assessment &amp; Escalation Triggers</h4>
-      <p>Assess sedation and pain scores every 4 hours. If inadequate, begin escalation below.</p>
-      <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(102,41,183,0.12);">
-        <p style="margin:0;">
-          <span class="tool-tag" style="background:var(--warning-bg); border-color:var(--warning); color:var(--warning);">&gt; 3 PRNs in 6h</span> → increase drip &nbsp;&nbsp;
-          <span class="tool-tag" style="background:var(--warning-bg); border-color:var(--warning); color:var(--warning);">&gt; 6 PRNs in 12h</span> → further increase
-        </p>
-        <p style="margin-top:6px; font-size:12px; color:var(--neutral-mid);">Non-procedural PRNs only. Do <strong>not</strong> count procedural sedation doses.</p>
+    <!-- ASSESSMENT & PRN RULES -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-header">Assessment &amp; Drip Adjustment Rules</div>
+      <div class="card-body" style="font-size:14px; line-height:1.7;">
+        <p>Assess sedation and pain scores <strong>every 4 hours</strong>. Reassess <strong>30 min</strong> after any intervention. Review PRN counts <strong>every morning on rounds</strong> and after resolving any escalation.</p>
+        <div style="margin-top:14px; padding-top:14px; border-top:1px solid rgba(0,0,0,0.06);">
+          <p><strong>&gt; 3 non-procedural PRNs in 6h</strong> or <strong>&gt; 6 in 12h</strong> → increase drip per increments below:</p>
+          <p style="margin-top:8px; font-family:var(--font-mono); font-size:13px; color:var(--primary-dark);">
+            Morphine <span class="dose-chip">+0.01 mg/kg/hr</span> &nbsp; Fentanyl <span class="dose-chip">+0.5 mcg/kg/hr</span> &nbsp; Dexmedetomidine <span class="dose-chip">+0.1 mcg/kg/hr</span>
+          </p>
+        </div>
       </div>
+    </div>
+
+    <div style="font-size:14.5px; color:var(--neutral-dark); margin-bottom:20px; line-height:1.7;">
+      If pain or sedation is out of goal range, <strong>restart from Step 1</strong> for each new episode.
     </div>
 
     <div class="flow">
@@ -1305,22 +1320,23 @@
         <div class="flow-step-label rn">
           <span class="badge badge-rn">RN Directed</span> Step 1
         </div>
-        <h4>Administer Matching Opioid Bolus up to 3× q30min</h4>
-        <p>Bolus dose <strong>equals the current hourly infusion rate</strong>. Reassess every <strong>30 min</strong> between doses, up to <strong>3 boluses</strong> total.</p>
+        <h4>Matching Opioid Bolus</h4>
+        <p>Bolus dose <strong>equals the current hourly infusion rate</strong>. Reassess in <strong>30 min</strong>. May repeat up to <strong>3 boluses total</strong> (q30min).</p>
+        <p style="margin-top:6px; font-size:13px; color:var(--neutral-mid);">If patient improves after 1 or 2 boluses, stop here. Do not have to give all 3.</p>
       </div>
 
-      <div class="flow-connector">Reassess patient — if still inadequate</div>
+      <div class="flow-connector">If out of goal range after boluses ↓</div>
 
       <!-- Step 2 -->
-      <div class="flow-step escalation">
-        <div class="flow-step-label md">
-          <span class="badge badge-md">Notify Provider</span> Step 2
+      <div class="flow-step">
+        <div class="flow-step-label rn">
+          <span class="badge badge-rn">RN Directed</span> Step 2
         </div>
         <h4>Notify First-Line Provider</h4>
-        <p>Inform the first-line provider of inadequate pain management despite bolus dosing.</p>
+        <p>Report: patient out of goal range despite boluses. Provide current drip rates, assessment scores, and vital signs.</p>
       </div>
 
-      <div class="flow-connector">Provider directs drip increase</div>
+      <div class="flow-connector">Provider directs drip increase ↓</div>
 
       <!-- Step 3 -->
       <div class="flow-step escalation">
@@ -1328,21 +1344,21 @@
           <span class="badge badge-md">Provider</span> Step 3
         </div>
         <h4>Increase Drip — First Escalation</h4>
-        <p>Increase drip incrementally based on assessment scores:</p>
         <div class="choice-grid" style="margin-top:10px;">
           <div class="choice-option preferred">
-            <div class="choice-label">If Pain Control Inadequate</div>
+            <div class="choice-label">Pain Out of Goal Range</div>
             <div class="choice-drug" style="font-size:13px;">Morphine <span class="dose-chip">+0.01 mg/kg/hr</span></div>
             <div class="choice-drug" style="font-size:13px; margin-top:4px;">Fentanyl <span class="dose-chip">+0.5 mcg/kg/hr</span></div>
           </div>
           <div class="choice-option preferred">
-            <div class="choice-label">If Sedation Inadequate</div>
-            <div class="choice-drug" style="font-size:13px;">Dex <span class="dose-chip">+0.1 mcg/kg/hr</span></div>
+            <div class="choice-label">Sedation Out of Goal Range</div>
+            <div class="choice-drug" style="font-size:13px;">Dexmedetomidine <span class="dose-chip">+0.1 mcg/kg/hr</span></div>
           </div>
         </div>
+        <p style="margin-top:10px; font-size:13px; color:var(--neutral-mid);">Reassess in 30 min after drip change.</p>
       </div>
 
-      <div class="flow-connector">Reassess patient — if still inadequate</div>
+      <div class="flow-connector">If out of goal range ↓</div>
 
       <!-- Step 4 -->
       <div class="flow-step escalation">
@@ -1350,43 +1366,40 @@
           <span class="badge badge-md">Provider</span> Step 4
         </div>
         <h4>Increase Drip — Second Escalation</h4>
-        <p>Repeat the same incremental increase:</p>
         <div class="choice-grid" style="margin-top:10px;">
           <div class="choice-option preferred">
-            <div class="choice-label">If Pain Control Inadequate</div>
+            <div class="choice-label">Pain Out of Goal Range</div>
             <div class="choice-drug" style="font-size:13px;">Morphine <span class="dose-chip">+0.01 mg/kg/hr</span></div>
             <div class="choice-drug" style="font-size:13px; margin-top:4px;">Fentanyl <span class="dose-chip">+0.5 mcg/kg/hr</span></div>
           </div>
           <div class="choice-option preferred">
-            <div class="choice-label">If Sedation Inadequate</div>
-            <div class="choice-drug" style="font-size:13px;">Dex <span class="dose-chip">+0.1 mcg/kg/hr</span></div>
+            <div class="choice-label">Sedation Out of Goal Range</div>
+            <div class="choice-drug" style="font-size:13px;">Dexmedetomidine <span class="dose-chip">+0.1 mcg/kg/hr</span></div>
           </div>
         </div>
+        <p style="margin-top:10px; font-size:13px; color:var(--neutral-mid);">Reassess in 30 min after drip change.</p>
       </div>
 
-      <div class="flow-connector">Reassess patient — if still inadequate</div>
+      <div class="flow-connector">If out of goal range ↓</div>
 
       <!-- Step 5 -->
       <div class="flow-step rescue">
-        <div class="flow-step-label rescue-label">
+        <div class="flow-step-label md">
           <span class="badge badge-md">Provider</span> Step 5
         </div>
-        <h4>Midazolam (Versed)</h4>
-        <p>Intermittent: <span class="dose-chip warn">0.025 mg/kg Q4H PRN</span></p>
+        <h4>Add Midazolam (Versed)</h4>
+        <p><span class="dose-chip warn">0.025 mg/kg Q4H PRN</span></p>
       </div>
 
-      <div class="flow-connector">If still inadequate</div>
+      <div class="flow-connector">If out of goal range ↓</div>
 
       <!-- Step 6 -->
       <div class="flow-step rescue">
-        <div class="flow-step-label rescue-label">
+        <div class="flow-step-label md">
           <span class="badge badge-md">Provider</span> Step 6
         </div>
-        <h4>Ketamine</h4>
-        <ul>
-          <li>Intermittent: <span class="dose-chip warn">0.5 mg/kg Q4H PRN</span></li>
-          <li>Infusion: <span class="dose-chip warn">0.1 mg/kg/hr</span> start, titrate to max <span class="dose-chip warn">1 mg/kg/hr</span></li>
-        </ul>
+        <h4>Add Ketamine</h4>
+        <p>Bolus <span class="dose-chip warn">0.5 mg/kg Q4H PRN</span> or infusion <span class="dose-chip warn">0.1–1 mg/kg/hr</span></p>
       </div>
 
     </div>
@@ -1422,15 +1435,18 @@
       <div class="card-body" style="font-size:14px; line-height:1.7;">
         <p><strong>Opioid:</strong> Reduce by <span class="dose-chip">10%</span> of current rate. Monitor for withdrawal signs.</p>
         <p style="margin-top:10px;"><strong>Dexmedetomidine:</strong> Reduce by <span class="dose-chip">10%</span> of current rate. Monitor for unexplained hypertension or tachycardia.</p>
+        <div style="margin-top:14px; padding:12px 16px; background:var(--neutral-bg); border-radius:var(--radius-sm); font-size:13px; color:var(--neutral-dark);">
+          <strong>Precision when writing wean rates:</strong> Fentanyl to <strong>1 decimal place</strong> (e.g. 1.2 mcg/kg/hr), morphine to <strong>3 decimal places</strong> (e.g. 0.018 mg/kg/hr), dexmedetomidine to <strong>1 decimal place</strong> (e.g. 0.4 mcg/kg/hr).
+        </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-header">SBS × WAT-1 Decision Matrix</div>
+      <div class="card-header">SBS × WAT-1 Decision Matrix — In Response to an Attempted Wean</div>
       <div class="card-body">
         <table class="med-table" style="text-align:center;">
           <thead>
-            <tr><th></th><th>Low WAT-1 (&lt;3)<br><span style="font-weight:400; font-size:11px;">No withdrawal</span></th><th>High WAT-1 (≥3)<br><span style="font-weight:400; font-size:11px;">Withdrawal</span></th></tr>
+            <tr><th></th><th>Low WAT-1 (&lt;4)<br><span style="font-weight:400; font-size:11px;">No withdrawal</span></th><th>High WAT-1 (≥4)<br><span style="font-weight:400; font-size:11px;">Withdrawal</span></th></tr>
           </thead>
           <tbody>
             <tr>
@@ -1440,20 +1456,20 @@
             </tr>
             <tr>
               <td class="med-name" style="text-align:left;">High SBS<br><span style="font-size:11px; font-weight:400;">Agitated</span></td>
-              <td style="background:var(--warning-bg); color:var(--warning); font-weight:600;">Inadequate sedation. Rescue opioid bolus or increase dex.</td>
+              <td style="background:var(--warning-bg); color:var(--warning); font-weight:600;">Inadequate sedation. Rescue opioid bolus or increase dexmedetomidine.</td>
               <td style="background:var(--accent-bg); color:var(--accent); font-weight:600;">Rescue opioid bolus and increase drip to pre-wean rate.</td>
             </tr>
           </tbody>
         </table>
         <div style="margin-top:14px; font-size:13px; line-height:1.6; color:var(--neutral-dark);">
           <p><strong>SBS</strong> answers: Is the patient adequately sedated? Target SBS −1 (responsive to gentle touch/voice).</p>
-          <p style="margin-top:6px;"><strong>WAT-1</strong> answers: Is the patient experiencing opioid/benzodiazepine withdrawal? Score ≥3 = withdrawal.</p>
+          <p style="margin-top:6px;"><strong>WAT-1</strong> answers: Is the patient experiencing opioid/benzodiazepine withdrawal? Score ≥4 = withdrawal.</p>
         </div>
       </div>
     </div>
 
     <div style="padding:12px 16px; background:var(--accent-bg); border-radius:var(--radius-sm); font-size:13.5px;">
-      <strong style="color:var(--accent);">Dex caveat:</strong> Alpha-2 agonists can mask withdrawal symptoms (blunting tachycardia, hypertension). WAT-1 does not capture dex-specific withdrawal. Monitor for unexplained hypertension/tachycardia separately when weaning dex.
+      <strong style="color:var(--accent);">Dexmedetomidine caveat:</strong> Alpha-2 agonists can mask withdrawal symptoms (blunting tachycardia, hypertension). WAT-1 does not capture dexmedetomidine-specific withdrawal. Monitor for unexplained hypertension/tachycardia separately when weaning dexmedetomidine.
     </div>
 
   </div>
@@ -1515,7 +1531,7 @@
           <tr>
             <td class="med-name">Acetaminophen</td>
             <td class="dose">n/a</td>
-            <td class="dose">10 mg/kg; Max 75 mg/kg/day or 4 g</td>
+            <td class="dose">10–15 mg/kg Q4–Q6H PRN; Max 75 mg/kg/day</td>
           </tr>
         </tbody>
       </table>
@@ -1532,18 +1548,19 @@
 <!-- ═══════════════════════════════════════════ -->
 <div class="pathway-panel" id="panel-bridge">
   <div style="margin-bottom:24px; padding:16px 20px; background:var(--neutral-bg); border-radius:var(--radius-md); font-size:14px; line-height:1.7; border:1px solid var(--neutral-light);">
-    <p><strong>Only start enteral bridge if you expect the IV drip off within 48–72 hours.</strong> After tolerating 2–3 enteral doses, begin stepwise drip reduction. Not all patients on dex need clonidine; many can wean dex alone.</p>
+    <p><strong>Only start enteral bridge if you expect the IV drip off within 48–72 hours.</strong> After tolerating 2–3 enteral doses, begin stepwise drip reduction. Not all patients on dexmedetomidine need clonidine; many can wean dexmedetomidine alone.</p>
     <p style="margin-top:10px;">At transfer, <strong>explicitly communicate all sedative wean plans to the floor team</strong>.</p>
   </div>
 
   <!-- CLONIDINE -->
   <div class="card">
-    <div class="card-header" style="color:var(--primary);">Dex → Clonidine</div>
+    <div class="card-header" style="color:var(--primary);">Dexmedetomidine → Clonidine</div>
     <div class="card-body" style="font-size:14px; line-height:1.7;">
-      <p><strong>Start when:</strong> Dex exposure <span class="dose-chip">≥ 7 days</span> and gtt <span class="dose-chip">&lt; 1 mcg/kg/hr</span></p>
-      <p style="margin-top:10px;"><strong>Not tolerating?</strong> Stop clonidine and continue dex-only wean.</p>
+      <p><strong>Start when:</strong> Dexmedetomidine exposure <span class="dose-chip">≥ 7 days</span> and dexmedetomidine gtt <span class="dose-chip">&lt; 1 mcg/kg/hr</span></p>
+      <p style="margin-top:8px; font-size:13px; color:var(--accent);"><strong>Do not start clonidine if dexmedetomidine is at or above 1 mcg/kg/hr.</strong> Wean dexmedetomidine below this threshold first.</p>
+      <p style="margin-top:10px;"><strong>Not tolerating?</strong> Stop clonidine and continue dexmedetomidine-only wean.</p>
       <div style="margin-top:14px; padding:10px 16px; background:var(--accent-bg); border-radius:var(--radius-sm); font-size:13px;">
-        <strong style="color:var(--accent);">Clonidine ≠ Dex.</strong> Clonidine has 8× lower α-2 selectivity than dex. Dose escalation will not replicate dex. <em>Weaning bridge only.</em>
+        <strong style="color:var(--accent);">Clonidine ≠ Dexmedetomidine.</strong> Clonidine has 8× lower α-2 selectivity than dexmedetomidine. Dose escalation will not replicate dexmedetomidine. <em>Weaning bridge only.</em>
       </div>
     </div>
   </div>
