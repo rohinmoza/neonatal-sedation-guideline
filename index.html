@@ -1039,13 +1039,12 @@
     <!-- DECISION GATE -->
     <div style="margin-bottom:24px;">
       <div style="font-size:14.5px; color:var(--neutral-dark); margin-bottom:14px; line-height:1.7;">
-        If pain or sedation is out of goal range, <strong>determine your starting point:</strong>
+        For each new episode of inadequate pain or sedation, <strong>determine your starting point:</strong>
       </div>
       <div class="choice-grid">
         <div class="choice-option preferred">
           <div class="choice-label">On Dexmedetomidine Only</div>
           <div class="choice-drug">↓ Step 1 Below</div>
-          <div style="font-size:12px; color:var(--neutral-mid); margin-top:4px;">Restart from Step 1 for each new episode</div>
         </div>
         <div class="choice-option preferred">
           <div class="choice-label">Already on Dexmedetomidine + Opioid Drip</div>
@@ -1309,8 +1308,8 @@
       </div>
     </div>
 
-    <div style="font-size:14.5px; color:var(--neutral-dark); margin-bottom:20px; line-height:1.7;">
-      If pain or sedation is out of goal range, <strong>restart from Step 1</strong> for each new episode.
+    <div class="alert-box" style="margin-bottom:20px;">
+      <strong>For each new episode of inadequate pain or sedation, always restart from Step 1.</strong>
     </div>
 
     <div class="flow">
@@ -1338,46 +1337,29 @@
 
       <div class="flow-connector">Provider directs drip increase ↓</div>
 
-      <!-- Step 3 -->
+      <!-- Steps 3–4 -->
       <div class="flow-step escalation">
         <div class="flow-step-label md">
-          <span class="badge badge-md">Provider</span> Step 3
+          <span class="badge badge-md">Provider</span> Steps 3–4
         </div>
-        <h4>Increase Drip — First Escalation</h4>
+        <h4>Increase Drip + Bolus (repeat up to 2 cycles)</h4>
         <div class="choice-grid" style="margin-top:10px;">
           <div class="choice-option preferred">
             <div class="choice-label">Pain Out of Goal Range</div>
-            <div class="choice-drug" style="font-size:13px;">Morphine <span class="dose-chip">+0.01 mg/kg/hr</span></div>
-            <div class="choice-drug" style="font-size:13px; margin-top:4px;">Fentanyl <span class="dose-chip">+0.5 mcg/kg/hr</span></div>
+            <div class="choice-drug" style="font-size:13px;">Morphine <span class="dose-chip">+0.01 mg/kg/hr</span><br>Fentanyl <span class="dose-chip">+0.5 mcg/kg/hr</span></div>
           </div>
           <div class="choice-option preferred">
             <div class="choice-label">Sedation Out of Goal Range</div>
             <div class="choice-drug" style="font-size:13px;">Dexmedetomidine <span class="dose-chip">+0.1 mcg/kg/hr</span></div>
           </div>
         </div>
-        <p style="margin-top:10px; font-size:13px; color:var(--neutral-mid);">Reassess in 30 min after drip change.</p>
-      </div>
-
-      <div class="flow-connector">If out of goal range ↓</div>
-
-      <!-- Step 4 -->
-      <div class="flow-step escalation">
-        <div class="flow-step-label md">
-          <span class="badge badge-md">Provider</span> Step 4
+        <div style="margin-top:14px; padding:14px 16px; background:var(--neutral-bg); border-radius:var(--radius-sm); font-size:14px; line-height:1.7;">
+          <strong>After each drip increase:</strong><br>
+          1. Give one matching opioid bolus immediately<br>
+          2. Reassess in 30 min — may give up to 2 additional boluses (q30min)<br>
+          3. If still out of goal range after 3 total boluses → increase drip again and repeat<br>
+          <p style="margin-top:8px; font-size:13px; color:var(--neutral-mid);">Maximum 2 drip increase cycles at this step. If still out of goal range, move to Step 5.</p>
         </div>
-        <h4>Increase Drip — Second Escalation</h4>
-        <div class="choice-grid" style="margin-top:10px;">
-          <div class="choice-option preferred">
-            <div class="choice-label">Pain Out of Goal Range</div>
-            <div class="choice-drug" style="font-size:13px;">Morphine <span class="dose-chip">+0.01 mg/kg/hr</span></div>
-            <div class="choice-drug" style="font-size:13px; margin-top:4px;">Fentanyl <span class="dose-chip">+0.5 mcg/kg/hr</span></div>
-          </div>
-          <div class="choice-option preferred">
-            <div class="choice-label">Sedation Out of Goal Range</div>
-            <div class="choice-drug" style="font-size:13px;">Dexmedetomidine <span class="dose-chip">+0.1 mcg/kg/hr</span></div>
-          </div>
-        </div>
-        <p style="margin-top:10px; font-size:13px; color:var(--neutral-mid);">Reassess in 30 min after drip change.</p>
       </div>
 
       <div class="flow-connector">If out of goal range ↓</div>
