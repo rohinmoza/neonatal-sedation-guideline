@@ -514,6 +514,22 @@
     color: var(--accent);
   }
 
+  /* ── CROSS-PATHWAY LINK ── */
+  .cross-pathway-link {
+    color: var(--primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .cross-pathway-link:hover {
+    opacity: 0.75;
+  }
+  .cross-pathway-link strong {
+    color: inherit;
+  }
+
   /* ── ASSESSMENT BOX ── */
   .assess-box {
     background: rgba(102,41,183,0.04);
@@ -1048,7 +1064,7 @@
         </div>
         <div class="choice-option preferred">
           <div class="choice-label">Already on Dexmedetomidine + Opioid Drip</div>
-          <div class="choice-drug">→ Post-Surgery Escalation Step 1</div>
+          <div class="choice-drug"><a href="#post/esc" class="cross-pathway-link">→ Post-Surgery Escalation Step 1</a></div>
           <div style="font-size:12px; color:var(--neutral-mid); margin-top:4px;">Matching opioid bolus, score-driven drip titration</div>
         </div>
       </div>
@@ -1105,7 +1121,7 @@
         <h4>Start Morphine Drip</h4>
         <p>Start continuous morphine at <span class="dose-chip">0.02 mg/kg/hr</span>.</p>
         <div style="margin-top:10px; padding:10px 14px; background:var(--primary-bg); border-radius:var(--radius-sm); font-size:13px;">
-          Patient is now on both drips. For all subsequent episodes, follow <strong>Post-Surgery Escalation Step 1</strong>.
+          Patient is now on both drips. For all subsequent episodes, follow <a href="#post/esc" class="cross-pathway-link"><strong>Post-Surgery Escalation Step 1</strong></a>.
         </div>
       </div>
 
@@ -1386,6 +1402,22 @@
 
     </div>
 
+    <div class="card" style="margin-top:20px;">
+      <div class="card-header">Struggling with sedation? Consider Gabapentin (adjunct)</div>
+      <div class="card-body">
+        <p>Adjunct for refractory agitation or visceral/neuropathic pain. Reduces opioid and benzodiazepine requirements; not a primary sedative.</p>
+
+        <p style="margin-top:10px;"><strong>Titration</strong> (2 to 3 days at each step):</p>
+        <ul style="margin-top:6px; padding-left:20px;">
+          <li><span class="dose-chip warn">5 mg/kg BID</span> → <span class="dose-chip warn">5 mg/kg TID</span> → <span class="dose-chip warn">7.5 mg/kg TID</span> → <span class="dose-chip warn">10 mg/kg TID</span> (max 30 mg/kg/day)</li>
+        </ul>
+
+        <p style="margin-top:10px; font-size:13px; color:var(--neutral-mid);">
+          <strong>⚑ Off-label in neonates.</strong> Renally cleared; adjust for immature renal function. Wean over ≥1 week.
+        </p>
+      </div>
+    </div>
+
     <div class="section-divider"></div>
 
     <div class="card">
@@ -1515,10 +1547,18 @@
             <td class="dose">n/a</td>
             <td class="dose">10–15 mg/kg Q4–Q6H PRN; Max 75 mg/kg/day</td>
           </tr>
+          <tr>
+            <td class="med-name">Gabapentin</td>
+            <td class="dose">BID → TID → 7.5 mg/kg TID → 10 mg/kg TID</td>
+            <td class="dose">Start 5 mg/kg PO BID; max 30 mg/kg/day if needed</td>
+          </tr>
         </tbody>
       </table>
       <div class="trigger-box" style="margin-top:16px;">
         <strong>⚑ Hydromorphone</strong> reserved for difficult sedation, opioid tachyphylaxis, ECMO, or renal insufficiency.
+      </div>
+      <div class="trigger-box" style="margin-top:12px;">
+        <strong>⚑ Gabapentin</strong> off-label in neonates; adjunct for refractory agitation or visceral/neuropathic pain. Renally cleared. Wean over ≥1 week.
       </div>
     </div>
   </div>
@@ -1589,11 +1629,21 @@ function initTabs(tabContainer, panelPrefix) {
         // Pathway-level tabs
         document.querySelectorAll('.pathway-panel').forEach(p => p.classList.remove('active'));
         document.getElementById('panel-' + target).classList.add('active');
+        // Update URL hash so the link is shareable
+        history.replaceState(null, '', '#' + target);
       } else {
         // Section-level tabs
         const parent = tab.closest('.pathway-panel');
         parent.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
         document.getElementById(target).classList.add('active');
+        // Update URL hash to compound form (e.g. "#post/esc")
+        // target looks like "post-esc" — split into pathway + section
+        const dashIdx = target.indexOf('-');
+        if (dashIdx > 0) {
+          const pathway = target.slice(0, dashIdx);
+          const section = target.slice(dashIdx + 1);
+          history.replaceState(null, '', '#' + pathway + '/' + section);
+        }
       }
     });
   });
@@ -1605,6 +1655,47 @@ initTabs(document.getElementById('pathwayTabs'));
 // Init all section tab groups
 document.querySelectorAll('.section-tabs').forEach(group => {
   initTabs(group);
+});
+
+// ── Open the correct pathway tab based on URL hash ──
+// Supports "#post" (just pathway) and "#post/esc" (pathway + section)
+function openPathwayFromHash() {
+  const hash = window.location.hash.slice(1);
+  if (!hash) return;
+  const [pathway, section] = hash.split('/');
+  const validPathways = ['pre', 'post', 'bridge', 'dosing'];
+  if (!validPathways.includes(pathway)) return;
+
+  const pathwayTab = document.querySelector('.pathway-tab[data-panel="' + pathway + '"]');
+  if (pathwayTab) pathwayTab.click();
+
+  if (section) {
+    const sectionTab = document.querySelector('.section-tab[data-section="' + pathway + '-' + section + '"]');
+    if (sectionTab) sectionTab.click();
+    // Scroll the activated panel into view so user lands on the right content
+    const panel = document.getElementById(pathway + '-' + section);
+    if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+window.addEventListener('DOMContentLoaded', openPathwayFromHash);
+window.addEventListener('hashchange', openPathwayFromHash);
+// Also run immediately in case DOMContentLoaded already fired
+openPathwayFromHash();
+
+// ── Cross-pathway links: always trigger pathway/section switch on click ──
+// (hashchange alone doesn't fire if user clicks the same link twice)
+document.querySelectorAll('.cross-pathway-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const hash = link.getAttribute('href');
+    if (window.location.hash === hash) {
+      // Same hash: re-trigger manually
+      openPathwayFromHash();
+    } else {
+      window.location.hash = hash;
+    }
+  });
 });
 </script>
 </body>
